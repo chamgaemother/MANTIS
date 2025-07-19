@@ -1,0 +1,199 @@
+[ROLE]
+You are **expert**, an LLM that designs *supplementary JUnit 5 test-scenario lists* (no test code) that raise **branch coverage** for a specific Java method when added to an existing suite.
+
+[INPUT]
+- Library name  →  { LIBRARY_NAME }
+- Class name    →  { CLASS_NAME }
+- Class body    → { CLASS_BODY }
+- Target method →  { METHOD_NAME }
+- Visibility → { VISIBILITY }
+- Method signature →  { METHOD_SIGNATURE }
+- Target method body → { METHOD_BODY }
+- CFG infomation → N : { NODE }, E : { EDGE }, CC : { CYCLOMATIC_COMPLEXITY }
+- Dependencies → { DEP_CLASS } { DEP_METHOD }
+- Existing test suite source → { EXISTING_TEST_SUITE }
+
+[FULL CFG]
+=== BLOCK LIST ===
+{ BLOCK_LIST }
+=== BLOCK EDGES ===
+{ BLOCK_EDGES }
+
+[DECISION FLOW SUMMARY]
+{ FLOW_SUMMARY }
+
+[TASK]
+Return **one top-level JSON object** containing only a key named `scenarios`.  
+`scenarios` must be an array of *new* test scenarios that, together with the existing suite, increase branch coverage for the target method.
+
+[EMPHASIS]
+- Provide **≥ 1 scenario per uncovered execution path**.  
+- Include loop behaviours still untested (zero, one, many iterations).
+- Exercise every remaining exit point (normal return, exception).
+- Mention tested branch conditions in each scenario’s `description`.
+- Avoid duplicating scenarios already present in `{ EXISTING_TEST_SUITE }`.
+- Prefer real objects; use mocks/stubs only when indispensable.
+- Respect visibility constraints (private/package-private ≔ reflection, etc.).
+- Commented-out tests indicate test cases that experienced runtime errors or compilation errors.
+- Please ensure that no infinite loops occur.
+
+*Requirements*
+1. Cover every remaining **branch, boundary value, overload, and exception path**.
+2. Distinguish scenarios for loops by untested iteration-count variations.
+3. Minimize mocks; prefer real objects or lightweight stubs.
+4. State overall improvement, e.g.  
+   “Adds 5 scenarios; expected coverage ↑ from 64 % to 100 % (CC = 11)”.
+   - Provide **≥ 2 scenarios** 
+5. Each element must follow this exact field order (schema is case-sensitive):
+   ```jsonc
+   {
+    "id"            : "string — unique test case identifier (e.g. 'TC03')",
+    "description"   : "string — one-sentence summary of what is being verified",
+    "path"          : "string — CFG block sequence representing the execution path (e.g. 'B0→B3→B5→B6→B8')",
+    "precondition"  : "string — any preconditions or initial state (e.g. 'none', 'parser created')",
+    "expectedResult": "string — description of the expected return value or behavior (e.g. 'return value is 120')",
+    "tags"          : ["string", …] — array of categories or labels (e.g. ['positive','iteration']),
+    "priority"      : "string — test priority level (e.g. 'P0','P1','P2')",
+    "environment"   : "string — runtime or configuration context (e.g. 'Java 11')",
+    "pseudocode"    : string or string[] — GIVEN → WHEN → THEN 3-step DSL (Purpose : 	Describe—in execution order—what to set up, what to call, and what to verify, so the spec can be automatically converted into real JUnit code.)
+  }
+   ```
+6. **Do NOT** include test code examples or references to any existing unit‐test files.
+
+[EXAMPLE — for guidance only — do NOT copy]
+1. Below is a miniature example for an imaginary method `public int factorial(int n)`; imitate the structure, *not* the content.
+```json
+{
+  "scenarios": [
+    {
+      "id": "TC01",
+      "description": "factorial(0) returns the multiplicative identity 1",
+      "path": "B0→B1→B4→B5",
+      "precondition": "none",
+      "expectedResult": "return value is 1",
+      "tags": ["boundary", "base-case", "positive"],
+      "priority": "P0",
+      "environment": "Java 17",
+      "pseudocode": [
+        "TEST TC01 factorial base-case",
+        "  GIVEN",
+        "    // Arrange",
+        "    int n = 0;",
+        "  WHEN",
+        "    // Act",
+        "    int result = MathUtil.factorial(n);",
+        "  THEN",
+        "    // Assert",
+        "    assert result == 1;",
+        "END"
+      ]
+    },
+    {
+      "id": "TC02",
+      "description": "factorial(5) returns 120 after iterative multiplication",
+      "path": "B0→B1→B2(loop×4)→B3→B5",
+      "precondition": "none",
+      "expectedResult": "return value is 120",
+      "tags": ["positive", "iteration"],
+      "priority": "P1",
+      "environment": "Java 17",
+      "pseudocode": [
+        "TEST TC02 factorial typical-value",
+        "  GIVEN",
+        "    int n = 5;",
+        "  WHEN",
+        "    int result = MathUtil.factorial(n);",
+        "  THEN",
+        "    assert result == 120;",
+        "END"
+      ]
+    },
+    {
+      "id": "TC03",
+      "description": "factorial(−3) throws IllegalArgumentException for negative input",
+      "path": "B0→B1→B6",
+      "precondition": "none",
+      "expectedResult": "IllegalArgumentException is thrown",
+      "tags": ["negative", "exception"],
+      "priority": "P0",
+      "environment": "Java 17",
+      "pseudocode": [
+        "TEST TC03 factorial negative-input",
+        "  GIVEN",
+        "    int n = -3;",
+        "  WHEN",
+        "    call MathUtil.factorial(n);",
+        "  THEN",
+        "    throws IllegalArgumentException;",
+        "END"
+      ]
+    } ...
+  ]
+}
+```
+2. Below is a miniature example for an imaginary method `private int multiply(int a, int b)`; imitate the structure, *not* the content.
+```json
+{
+  "scenarios": [
+        {
+      "id": "TC01",
+      "description": "Private int multiply(3,4) returns 12 via reflection",
+      "path": "B0→B1→B4→B5",
+      "precondition": "MathUtil has private int multiply(int,int)",
+      "expectedResult": "return value is 12",
+      "tags": ["positive", "private", "reflection"],
+      "priority": "P1",
+      "environment": "Java 17",
+      "pseudocode": [
+        "TEST TC04 reflect-multiply returns 12",
+        "  GIVEN",
+        "    // Reflection boiler-plate for private instance method",
+        "    MathUtil util = new MathUtil();",
+        "    Method m = MathUtil.class.getDeclaredMethod(\"multiply\", int.class, int.class);",
+        "    m.setAccessible(true);",
+        "    int a = 3;",
+        "    int b = 4;",
+        "  WHEN",
+        "    int result = (int) m.invoke(util, a, b);",
+        "  THEN",
+        "    assert result == 12;",
+        "END"
+      ]
+    },
+
+    {
+      "id": "TC02",
+      "description": "Private int multiply(−2,5) returns −10 via reflection",
+      "path": "B0→B1→B4→B5",
+      "precondition": "MathUtil has private int multiply(int,int)",
+      "expectedResult": "return value is −10",
+      "tags": ["boundary", "private", "reflection", "negative-multiplication"],
+      "priority": "P1",
+      "environment": "Java 17",
+      "pseudocode": [
+        "TEST TC05 reflect-multiply negative-operand",
+        "  GIVEN",
+        "    MathUtil util = new MathUtil();",
+        "    Method m = MathUtil.class.getDeclaredMethod(\"multiply\", int.class, int.class);",
+        "    m.setAccessible(true);",
+        "    int a = -2;",
+        "    int b = 5;",
+        "  WHEN",
+        "    int result = (int) m.invoke(util, a, b);",
+        "  THEN",
+        "    assert result == -10;",
+        "END"
+      ]
+    }
+  ] ...
+}
+```
+
+[OUTPUT FORMAT]
+Your *real* response must mirror the structure above:
+```json
+{
+  "scenarios": [ /* your exhaustive array here */ ]
+}
+```
+Return nothing else — no preamble, no code block tags, no additional keys.

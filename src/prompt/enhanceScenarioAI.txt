@@ -1,0 +1,6 @@
+Got it—I’m ready to dive in.
+I’ll need:
+    1. **The full source code of the target Java class** you’d like to test.
+    2. **The current JUnit 5 test class** (or classes) you already have for it.
+
+Once you share those, I’ll analyze what’s covered and what’s not, then generate a single, self‑contained test class—returned exactly in the JSON format you specified. Feel free to paste the code or attach the files.

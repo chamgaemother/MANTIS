@@ -1,0 +1,1274 @@
+[
+  {
+    "clazz": "org.apache.commons.csv.CSVFormat",
+    "methodName": "equals",
+    "signature": "boolean equals(java.lang.Object)",
+    "visibility": "public",
+    "body": "{\r\n    if (this \u003d\u003d obj) {\r\n        return true;\r\n    }\r\n    if (obj \u003d\u003d null || getClass() !\u003d obj.getClass()) {\r\n        return false;\r\n    }\r\n    final CSVFormat other \u003d (CSVFormat) obj;\r\n    return duplicateHeaderMode \u003d\u003d other.duplicateHeaderMode \u0026\u0026 allowMissingColumnNames \u003d\u003d other.allowMissingColumnNames \u0026\u0026 autoFlush \u003d\u003d other.autoFlush \u0026\u0026 Objects.equals(commentMarker, other.commentMarker) \u0026\u0026 Objects.equals(delimiter, other.delimiter) \u0026\u0026 Objects.equals(escapeCharacter, other.escapeCharacter) \u0026\u0026 Arrays.equals(headers, other.headers) \u0026\u0026 Arrays.equals(headerComments, other.headerComments) \u0026\u0026 ignoreEmptyLines \u003d\u003d other.ignoreEmptyLines \u0026\u0026 ignoreHeaderCase \u003d\u003d other.ignoreHeaderCase \u0026\u0026 ignoreSurroundingSpaces \u003d\u003d other.ignoreSurroundingSpaces \u0026\u0026 Objects.equals(nullString, other.nullString) \u0026\u0026 Objects.equals(quoteCharacter, other.quoteCharacter) \u0026\u0026 quoteMode \u003d\u003d other.quoteMode \u0026\u0026 Objects.equals(quotedNullString, other.quotedNullString) \u0026\u0026 Objects.equals(recordSeparator, other.recordSeparator) \u0026\u0026 skipHeaderRecord \u003d\u003d other.skipHeaderRecord \u0026\u0026 trailingDelimiter \u003d\u003d other.trailingDelimiter \u0026\u0026 trim \u003d\u003d other.trim;\r\n}",
+    "nodes": 27,
+    "edges": 46,
+    "cc": 21,
+    "flowSummary": [
+      "B0 : If(r0 !\u003d r1) → B1 | else → B2",
+      "B2 : If(r1 \u003d\u003d null) → B3 | else → B4",
+      "B3 : If($r3 \u003d\u003d $r2) → B4 | else → B5",
+      "B5 : If($r6 !\u003d $r5) → B6 | else → B25",
+      "B6 : If($z1 !\u003d $z0) → B7 | else → B25",
+      "B7 : If($z3 !\u003d $z2) → B8 | else → B25",
+      "B8 : If($z4 \u003d\u003d false) → B9 | else → B25",
+      "B9 : If($z5 \u003d\u003d false) → B10 | else → B25",
+      "B10 : If($z6 \u003d\u003d false) → B11 | else → B25",
+      "B11 : If($z7 \u003d\u003d false) → B12 | else → B25",
+      "B12 : If($z8 \u003d\u003d false) → B13 | else → B25",
+      "B13 : If($z10 !\u003d $z9) → B14 | else → B25",
+      "B14 : If($z12 !\u003d $z11) → B15 | else → B25",
+      "B15 : If($z14 !\u003d $z13) → B16 | else → B25",
+      "B16 : If($z15 \u003d\u003d false) → B17 | else → B25",
+      "B17 : If($z16 \u003d\u003d false) → B18 | else → B25",
+      "B18 : If($r22 !\u003d $r21) → B19 | else → B25",
+      "B19 : If($z17 \u003d\u003d false) → B20 | else → B25",
+      "B20 : If($z18 \u003d\u003d false) → B21 | else → B25",
+      "B21 : If($z20 !\u003d $z19) → B22 | else → B25",
+      "B22 : If($z22 !\u003d $z21) → B23 | else → B25",
+      "B23 : If($z24 !\u003d $z23) → B24 | else → B25"
+    ],
+    "blockList": [
+      "B0 {\n  CSVFormat\n  Object\n  if (r0 !\u003d r1) goto B1 else B2\n}",
+      "B1 {\n  return\n}",
+      "B2 {\n  if (r1 \u003d\u003d null) goto B3 else B4\n}",
+      "B3 {\n  $r3 \u003d r0.getClass()\n  $r2 \u003d r1.getClass()\n  if ($r3 \u003d\u003d $r2) goto B4 else B5\n}",
+      "B4 {\n  return\n}",
+      "B5 {\n  r4 \u003d CSVFormat) r1\n  $r6 \u003d DuplicateHeaderMode duplicateHeaderMode\u003e\n  $r5 \u003d DuplicateHeaderMode duplicateHeaderMode\u003e\n  if ($r6 !\u003d $r5) goto B6 else B25\n}",
+      "B6 {\n  $z1 \u003d CSVFormat: boolean allowMissingColumnNames\u003e\n  $z0 \u003d CSVFormat: boolean allowMissingColumnNames\u003e\n  if ($z1 !\u003d $z0) goto B7 else B25\n}",
+      "B7 {\n  $z3 \u003d CSVFormat: boolean autoFlush\u003e\n  $z2 \u003d CSVFormat: boolean autoFlush\u003e\n  if ($z3 !\u003d $z2) goto B8 else B25\n}",
+      "B8 {\n  $r8 \u003d Character commentMarker\u003e\n  $r7 \u003d Character commentMarker\u003e\n  $z4 \u003d Objects.equals($r8, $r7)\n  if ($z4 \u003d\u003d false) goto B9 else B25\n}",
+      "B9 {\n  $r10 \u003d String delimiter\u003e\n  $r9 \u003d String delimiter\u003e\n  $z5 \u003d Objects.equals($r10, $r9)\n  if ($z5 \u003d\u003d false) goto B10 else B25\n}",
+      "B10 {\n  $r12 \u003d Character escapeCharacter\u003e\n  $r11 \u003d Character escapeCharacter\u003e\n  $z6 \u003d Objects.equals($r12, $r11)\n  if ($z6 \u003d\u003d false) goto B11 else B25\n}",
+      "B11 {\n  $r14 \u003d String[] headers\u003e\n  $r13 \u003d String[] headers\u003e\n  $z7 \u003d Arrays.equals($r14, $r13)\n  if ($z7 \u003d\u003d false) goto B12 else B25\n}",
+      "B12 {\n  $r16 \u003d String[] headerComments\u003e\n  $r15 \u003d String[] headerComments\u003e\n  $z8 \u003d Arrays.equals($r16, $r15)\n  if ($z8 \u003d\u003d false) goto B13 else B25\n}",
+      "B13 {\n  $z10 \u003d CSVFormat: boolean ignoreEmptyLines\u003e\n  $z9 \u003d CSVFormat: boolean ignoreEmptyLines\u003e\n  if ($z10 !\u003d $z9) goto B14 else B25\n}",
+      "B14 {\n  $z12 \u003d CSVFormat: boolean ignoreHeaderCase\u003e\n  $z11 \u003d CSVFormat: boolean ignoreHeaderCase\u003e\n  if ($z12 !\u003d $z11) goto B15 else B25\n}",
+      "B15 {\n  $z14 \u003d CSVFormat: boolean ignoreSurroundingSpaces\u003e\n  $z13 \u003d CSVFormat: boolean ignoreSurroundingSpaces\u003e\n  if ($z14 !\u003d $z13) goto B16 else B25\n}",
+      "B16 {\n  $r18 \u003d String nullString\u003e\n  $r17 \u003d String nullString\u003e\n  $z15 \u003d Objects.equals($r18, $r17)\n  if ($z15 \u003d\u003d false) goto B17 else B25\n}",
+      "B17 {\n  $r20 \u003d Character quoteCharacter\u003e\n  $r19 \u003d Character quoteCharacter\u003e\n  $z16 \u003d Objects.equals($r20, $r19)\n  if ($z16 \u003d\u003d false) goto B18 else B25\n}",
+      "B18 {\n  $r22 \u003d QuoteMode quoteMode\u003e\n  $r21 \u003d QuoteMode quoteMode\u003e\n  if ($r22 !\u003d $r21) goto B19 else B25\n}",
+      "B19 {\n  $r24 \u003d String quotedNullString\u003e\n  $r23 \u003d String quotedNullString\u003e\n  $z17 \u003d Objects.equals($r24, $r23)\n  if ($z17 \u003d\u003d false) goto B20 else B25\n}",
+      "B20 {\n  $r26 \u003d String recordSeparator\u003e\n  $r25 \u003d String recordSeparator\u003e\n  $z18 \u003d Objects.equals($r26, $r25)\n  if ($z18 \u003d\u003d false) goto B21 else B25\n}",
+      "B21 {\n  $z20 \u003d CSVFormat: boolean skipHeaderRecord\u003e\n  $z19 \u003d CSVFormat: boolean skipHeaderRecord\u003e\n  if ($z20 !\u003d $z19) goto B22 else B25\n}",
+      "B22 {\n  $z22 \u003d CSVFormat: boolean trailingDelimiter\u003e\n  $z21 \u003d CSVFormat: boolean trailingDelimiter\u003e\n  if ($z22 !\u003d $z21) goto B23 else B25\n}",
+      "B23 {\n  $z24 \u003d CSVFormat: boolean trim\u003e\n  $z23 \u003d CSVFormat: boolean trim\u003e\n  if ($z24 !\u003d $z23) goto B24 else B25\n}",
+      "B24 {\n  $z25 \u003d 1\n  goto B26\n}",
+      "B25 {\n  $z25 \u003d 0\n}",
+      "B26 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e [EXIT]",
+      "B2 --\u003e B3",
+      "B2 --\u003e B4",
+      "B3 --\u003e B4",
+      "B3 --\u003e B5",
+      "B4 --\u003e [EXIT]",
+      "B5 --\u003e B6",
+      "B5 --\u003e B25",
+      "B6 --\u003e B7",
+      "B6 --\u003e B25",
+      "B7 --\u003e B8",
+      "B7 --\u003e B25",
+      "B8 --\u003e B9",
+      "B8 --\u003e B25",
+      "B9 --\u003e B10",
+      "B9 --\u003e B25",
+      "B10 --\u003e B11",
+      "B10 --\u003e B25",
+      "B11 --\u003e B12",
+      "B11 --\u003e B25",
+      "B12 --\u003e B13",
+      "B12 --\u003e B25",
+      "B13 --\u003e B14",
+      "B13 --\u003e B25",
+      "B14 --\u003e B15",
+      "B14 --\u003e B25",
+      "B15 --\u003e B16",
+      "B15 --\u003e B25",
+      "B16 --\u003e B17",
+      "B16 --\u003e B25",
+      "B17 --\u003e B18",
+      "B17 --\u003e B25",
+      "B18 --\u003e B19",
+      "B18 --\u003e B25",
+      "B19 --\u003e B20",
+      "B19 --\u003e B25",
+      "B20 --\u003e B21",
+      "B20 --\u003e B25",
+      "B21 --\u003e B22",
+      "B21 --\u003e B25",
+      "B22 --\u003e B23",
+      "B22 --\u003e B25",
+      "B23 --\u003e B24",
+      "B23 --\u003e B25",
+      "B24 --\u003e B26",
+      "B25 --\u003e B26",
+      "B26 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVFormat#getClass(...0)",
+        "body": "(source not found)"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVFormat",
+    "methodName": "getAllowDuplicateHeaderNames",
+    "signature": "boolean getAllowDuplicateHeaderNames()",
+    "visibility": "public",
+    "body": "{\r\n    return duplicateHeaderMode \u003d\u003d DuplicateHeaderMode.ALLOW_ALL;\r\n}",
+    "nodes": 4,
+    "edges": 4,
+    "cc": 2,
+    "flowSummary": [
+      "B0 : If($r2 !\u003d $r1) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVFormat\n  $r2 \u003d DuplicateHeaderMode duplicateHeaderMode\u003e\n  $r1 \u003d DuplicateHeaderMode ALLOW_ALL\u003e\n  if ($r2 !\u003d $r1) goto B1 else B2\n}",
+      "B1 {\n  $z0 \u003d 1\n  goto B3\n}",
+      "B2 {\n  $z0 \u003d 0\n}",
+      "B3 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B3",
+      "B3 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": []
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVFormat",
+    "methodName": "getHeader",
+    "signature": "java.lang.String[] getHeader()",
+    "visibility": "public",
+    "body": "{\r\n    return headers !\u003d null ? headers.clone() : null;\r\n}",
+    "nodes": 4,
+    "edges": 4,
+    "cc": 2,
+    "flowSummary": [
+      "B0 : If($r1 \u003d\u003d null) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVFormat\n  $r1 \u003d String[] headers\u003e\n  if ($r1 \u003d\u003d null) goto B1 else B2\n}",
+      "B1 {\n  $r2 \u003d String[] headers\u003e\n  $r3 \u003d $r2.clone()\n  $r4 \u003d String[]) $r3\n  goto B3\n}",
+      "B2 {\n  $r4 \u003d null\n}",
+      "B3 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B3",
+      "B3 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": []
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVFormat",
+    "methodName": "getHeaderComments",
+    "signature": "java.lang.String[] getHeaderComments()",
+    "visibility": "public",
+    "body": "{\r\n    return headerComments !\u003d null ? headerComments.clone() : null;\r\n}",
+    "nodes": 4,
+    "edges": 4,
+    "cc": 2,
+    "flowSummary": [
+      "B0 : If($r1 \u003d\u003d null) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVFormat\n  $r1 \u003d String[] headerComments\u003e\n  if ($r1 \u003d\u003d null) goto B1 else B2\n}",
+      "B1 {\n  $r2 \u003d String[] headerComments\u003e\n  $r3 \u003d $r2.clone()\n  $r4 \u003d String[]) $r3\n  goto B3\n}",
+      "B2 {\n  $r4 \u003d null\n}",
+      "B3 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B3",
+      "B3 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": []
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVFormat",
+    "methodName": "isCommentMarkerSet",
+    "signature": "boolean isCommentMarkerSet()",
+    "visibility": "public",
+    "body": "{\r\n    return commentMarker !\u003d null;\r\n}",
+    "nodes": 4,
+    "edges": 4,
+    "cc": 2,
+    "flowSummary": [
+      "B0 : If($r1 \u003d\u003d null) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVFormat\n  $r1 \u003d Character commentMarker\u003e\n  if ($r1 \u003d\u003d null) goto B1 else B2\n}",
+      "B1 {\n  $z0 \u003d 1\n  goto B3\n}",
+      "B2 {\n  $z0 \u003d 0\n}",
+      "B3 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B3",
+      "B3 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": []
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVFormat",
+    "methodName": "isEscapeCharacterSet",
+    "signature": "boolean isEscapeCharacterSet()",
+    "visibility": "public",
+    "body": "{\r\n    return escapeCharacter !\u003d null;\r\n}",
+    "nodes": 4,
+    "edges": 4,
+    "cc": 2,
+    "flowSummary": [
+      "B0 : If($r1 \u003d\u003d null) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVFormat\n  $r1 \u003d Character escapeCharacter\u003e\n  if ($r1 \u003d\u003d null) goto B1 else B2\n}",
+      "B1 {\n  $z0 \u003d 1\n  goto B3\n}",
+      "B2 {\n  $z0 \u003d 0\n}",
+      "B3 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B3",
+      "B3 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": []
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVFormat",
+    "methodName": "isNullStringSet",
+    "signature": "boolean isNullStringSet()",
+    "visibility": "public",
+    "body": "{\r\n    return nullString !\u003d null;\r\n}",
+    "nodes": 4,
+    "edges": 4,
+    "cc": 2,
+    "flowSummary": [
+      "B0 : If($r1 \u003d\u003d null) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVFormat\n  $r1 \u003d String nullString\u003e\n  if ($r1 \u003d\u003d null) goto B1 else B2\n}",
+      "B1 {\n  $z0 \u003d 1\n  goto B3\n}",
+      "B2 {\n  $z0 \u003d 0\n}",
+      "B3 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B3",
+      "B3 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": []
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVFormat",
+    "methodName": "isQuoteCharacterSet",
+    "signature": "boolean isQuoteCharacterSet()",
+    "visibility": "public",
+    "body": "{\r\n    return quoteCharacter !\u003d null;\r\n}",
+    "nodes": 4,
+    "edges": 4,
+    "cc": 2,
+    "flowSummary": [
+      "B0 : If($r1 \u003d\u003d null) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVFormat\n  $r1 \u003d Character quoteCharacter\u003e\n  if ($r1 \u003d\u003d null) goto B1 else B2\n}",
+      "B1 {\n  $z0 \u003d 1\n  goto B3\n}",
+      "B2 {\n  $z0 \u003d 0\n}",
+      "B3 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B3",
+      "B3 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": []
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVFormat",
+    "methodName": "print",
+    "signature": "void print(java.lang.Object,java.lang.Appendable,boolean)",
+    "visibility": "public",
+    "body": "{\r\n    // null values are considered empty\r\n    // Only call CharSequence.toString() if you have to, helps GC-free use cases.\r\n    CharSequence charSequence;\r\n    if (value \u003d\u003d null) {\r\n        // https://issues.apache.org/jira/browse/CSV-203\r\n        if (null \u003d\u003d nullString) {\r\n            charSequence \u003d EMPTY;\r\n        } else if (QuoteMode.ALL \u003d\u003d quoteMode) {\r\n            charSequence \u003d quotedNullString;\r\n        } else {\r\n            charSequence \u003d nullString;\r\n        }\r\n    } else if (value instanceof CharSequence) {\r\n        charSequence \u003d (CharSequence) value;\r\n    } else if (value instanceof Reader) {\r\n        print((Reader) value, out, newRecord);\r\n        return;\r\n    } else {\r\n        charSequence \u003d value.toString();\r\n    }\r\n    charSequence \u003d getTrim() ? trim(charSequence) : charSequence;\r\n    print(value, charSequence, out, newRecord);\r\n}",
+    "nodes": 15,
+    "edges": 19,
+    "cc": 6,
+    "flowSummary": [
+      "B0 : If(r0 !\u003d null) → B1 | else → B6",
+      "B1 : If(null !\u003d $r4) → B2 | else → B3",
+      "B3 : If($r6 !\u003d $r5) → B4 | else → B5",
+      "B6 : If($z0 \u003d\u003d false) → B7 | else → B8",
+      "B8 : If($z1 \u003d\u003d false) → B9 | else → B10",
+      "B11 : If($z3 \u003d\u003d false) → B12 | else → B13"
+    ],
+    "blockList": [
+      "B0 {\n  CSVFormat\n  Object\n  Appendable\n  z2 :\u003d @parameter2: boolean\n  if (r0 !\u003d null) goto B1 else B6\n}",
+      "B1 {\n  $r4 \u003d String nullString\u003e\n  if (null !\u003d $r4) goto B2 else B3\n}",
+      "B2 {\n  r7 \u003d \"\"\n  goto B11\n}",
+      "B3 {\n  $r6 \u003d QuoteMode ALL\u003e\n  $r5 \u003d QuoteMode quoteMode\u003e\n  if ($r6 !\u003d $r5) goto B4 else B5\n}",
+      "B4 {\n  r7 \u003d String quotedNullString\u003e\n  goto B11\n}",
+      "B5 {\n  r7 \u003d String nullString\u003e\n  goto B11\n}",
+      "B6 {\n  $z0 \u003d CharSequence\n  if ($z0 \u003d\u003d false) goto B7 else B8\n}",
+      "B7 {\n  r7 \u003d CharSequence) r0\n  goto B11\n}",
+      "B8 {\n  $z1 \u003d Reader\n  if ($z1 \u003d\u003d false) goto B9 else B10\n}",
+      "B9 {\n  $r3 \u003d Reader) r0\n  r1.print($r3, r2, z2)\n  return\n}",
+      "B10 {\n  r7 \u003d r0.toString()\n}",
+      "B11 {\n  $z3 \u003d r1.getTrim()\n  if ($z3 \u003d\u003d false) goto B12 else B13\n}",
+      "B12 {\n  $r8 \u003d CSVFormat.trim(r7)\n  goto B14\n}",
+      "B13 {\n  $r8 \u003d r7\n}",
+      "B14 {\n  r1.print(r0, $r8, r2, z2)\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B6",
+      "B1 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B11",
+      "B3 --\u003e B4",
+      "B3 --\u003e B5",
+      "B4 --\u003e B11",
+      "B5 --\u003e B11",
+      "B6 --\u003e B7",
+      "B6 --\u003e B8",
+      "B7 --\u003e B11",
+      "B8 --\u003e B9",
+      "B8 --\u003e B10",
+      "B9 --\u003e [EXIT]",
+      "B10 --\u003e B11",
+      "B11 --\u003e B12",
+      "B11 --\u003e B13",
+      "B12 --\u003e B14",
+      "B13 --\u003e B14",
+      "B14 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVFormat#print(...3)",
+        "body": "{\r\n    // null values are considered empty\r\n    // Only call CharSequence.toString() if you have to, helps GC-free use cases.\r\n    CharSequence charSequence;\r\n    if (value \u003d\u003d null) {\r\n        // https://issues.apache.org/jira/browse/CSV-203\r\n        if (null \u003d\u003d nullString) {\r\n            charSequence \u003d EMPTY;\r\n        } else if (QuoteMode.ALL \u003d\u003d quoteMode) {\r\n            charSequence \u003d quotedNullString;\r\n        } else {\r\n            charSequence \u003d nullString;\r\n        }\r\n    } else if (value instanceof CharSequence) {\r\n        charSequence \u003d (CharSequence) value;\r\n    } else if (value instanceof Reader) {\r\n        print((Reader) value, out, newRecord);\r\n        return;\r\n    } else {\r\n        charSequence \u003d value.toString();\r\n    }\r\n    charSequence \u003d getTrim() ? trim(charSequence) : charSequence;\r\n    print(value, charSequence, out, newRecord);\r\n}"
+      },
+      {
+        "name": "CSVFormat#trim(...1)",
+        "body": "{\r\n    if (charSequence instanceof String) {\r\n        return ((String) charSequence).trim();\r\n    }\r\n    final int count \u003d charSequence.length();\r\n    int len \u003d count;\r\n    int pos \u003d 0;\r\n    while (pos \u003c len \u0026\u0026 isTrimChar(charSequence, pos)) {\r\n        pos++;\r\n    }\r\n    while (pos \u003c len \u0026\u0026 isTrimChar(charSequence, len - 1)) {\r\n        len--;\r\n    }\r\n    return pos \u003e 0 || len \u003c count ? charSequence.subSequence(pos, len) : charSequence;\r\n}"
+      },
+      {
+        "name": "CSVFormat#getTrim(...0)",
+        "body": "{\r\n    return trim;\r\n}"
+      },
+      {
+        "name": "CSVFormat#print(...4)",
+        "body": "{\r\n    final int offset \u003d 0;\r\n    final int len \u003d value.length();\r\n    if (!newRecord) {\r\n        out.append(getDelimiterString());\r\n    }\r\n    if (object \u003d\u003d null) {\r\n        out.append(value);\r\n    } else if (isQuoteCharacterSet()) {\r\n        // the original object is needed so can check for Number\r\n        printWithQuotes(object, value, out, newRecord);\r\n    } else if (isEscapeCharacterSet()) {\r\n        printWithEscapes(value, out);\r\n    } else {\r\n        out.append(value, offset, len);\r\n    }\r\n}"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVFormat",
+    "methodName": "println",
+    "signature": "void println(java.lang.Appendable)",
+    "visibility": "public",
+    "body": "{\r\n    if (getTrailingDelimiter()) {\r\n        append(getDelimiterString(), appendable);\r\n    }\r\n    if (recordSeparator !\u003d null) {\r\n        append(recordSeparator, appendable);\r\n    }\r\n}",
+    "nodes": 5,
+    "edges": 6,
+    "cc": 3,
+    "flowSummary": [
+      "B0 : If($z0 \u003d\u003d false) → B1 | else → B2",
+      "B2 : If($r1 \u003d\u003d null) → B3 | else → B4"
+    ],
+    "blockList": [
+      "B0 {\n  CSVFormat\n  Appendable\n  $z0 \u003d r0.getTrailingDelimiter()\n  if ($z0 \u003d\u003d false) goto B1 else B2\n}",
+      "B1 {\n  $r4 \u003d r0.getDelimiterString()\n  r0.append($r4, r2)\n}",
+      "B2 {\n  $r1 \u003d String recordSeparator\u003e\n  if ($r1 \u003d\u003d null) goto B3 else B4\n}",
+      "B3 {\n  $r3 \u003d String recordSeparator\u003e\n  r0.append($r3, r2)\n}",
+      "B4 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B2",
+      "B2 --\u003e B3",
+      "B2 --\u003e B4",
+      "B3 --\u003e B4",
+      "B4 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVFormat#getDelimiterString(...0)",
+        "body": "{\r\n    return delimiter;\r\n}"
+      },
+      {
+        "name": "CSVFormat#getTrailingDelimiter(...0)",
+        "body": "{\r\n    return trailingDelimiter;\r\n}"
+      },
+      {
+        "name": "CSVFormat#append(...2)",
+        "body": "{\r\n    //try {\r\n    appendable.append(c);\r\n    //} catch (final IOException e) {\r\n    //    throw new UncheckedIOException(e);\r\n    //}\r\n}"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVFormat",
+    "methodName": "printRecord",
+    "signature": "void printRecord(java.lang.Appendable,java.lang.Object[])",
+    "visibility": "public",
+    "body": "{\r\n    for (int i \u003d 0; i \u003c values.length; i++) {\r\n        print(values[i], appendable, i \u003d\u003d 0);\r\n    }\r\n    println(appendable);\r\n}",
+    "nodes": 7,
+    "edges": 8,
+    "cc": 3,
+    "flowSummary": [
+      "B1 : If(i1 \u003e\u003d $i0) → B2 | else → B6",
+      "B2 : If(i1 !\u003d 0) → B3 | else → B4"
+    ],
+    "blockList": [
+      "B0 {\n  CSVFormat\n  Appendable\n  Object[]\n  i1 \u003d 0\n}",
+      "B1 {\n  $i0 \u003d lengthof r0\n  if (i1 \u003e\u003d $i0) goto B2 else B6\n}",
+      "B2 {\n  $r3 \u003d r0[i1]\n  if (i1 !\u003d 0) goto B3 else B4\n}",
+      "B3 {\n  $z0 \u003d 1\n  goto B5\n}",
+      "B4 {\n  $z0 \u003d 0\n}",
+      "B5 {\n  r1.print($r3, r2, $z0)\n  i1 \u003d i1 + 1\n  goto B1\n}",
+      "B6 {\n  r1.println(r2)\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B1 --\u003e B2",
+      "B1 --\u003e B6",
+      "B2 --\u003e B3",
+      "B2 --\u003e B4",
+      "B3 --\u003e B5",
+      "B4 --\u003e B5",
+      "B5 --\u003e B1",
+      "B6 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVFormat#print(...3)",
+        "body": "{\r\n    // null values are considered empty\r\n    // Only call CharSequence.toString() if you have to, helps GC-free use cases.\r\n    CharSequence charSequence;\r\n    if (value \u003d\u003d null) {\r\n        // https://issues.apache.org/jira/browse/CSV-203\r\n        if (null \u003d\u003d nullString) {\r\n            charSequence \u003d EMPTY;\r\n        } else if (QuoteMode.ALL \u003d\u003d quoteMode) {\r\n            charSequence \u003d quotedNullString;\r\n        } else {\r\n            charSequence \u003d nullString;\r\n        }\r\n    } else if (value instanceof CharSequence) {\r\n        charSequence \u003d (CharSequence) value;\r\n    } else if (value instanceof Reader) {\r\n        print((Reader) value, out, newRecord);\r\n        return;\r\n    } else {\r\n        charSequence \u003d value.toString();\r\n    }\r\n    charSequence \u003d getTrim() ? trim(charSequence) : charSequence;\r\n    print(value, charSequence, out, newRecord);\r\n}"
+      },
+      {
+        "name": "CSVFormat#println(...1)",
+        "body": "{\r\n    if (getTrailingDelimiter()) {\r\n        append(getDelimiterString(), appendable);\r\n    }\r\n    if (recordSeparator !\u003d null) {\r\n        append(recordSeparator, appendable);\r\n    }\r\n}"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVFormat",
+    "methodName": "toString",
+    "signature": "java.lang.String toString()",
+    "visibility": "public",
+    "body": "{\r\n    final StringBuilder sb \u003d new StringBuilder();\r\n    sb.append(\"Delimiter\u003d\u003c\").append(delimiter).append(\u0027\u003e\u0027);\r\n    if (isEscapeCharacterSet()) {\r\n        sb.append(\u0027 \u0027);\r\n        sb.append(\"Escape\u003d\u003c\").append(escapeCharacter).append(\u0027\u003e\u0027);\r\n    }\r\n    if (isQuoteCharacterSet()) {\r\n        sb.append(\u0027 \u0027);\r\n        sb.append(\"QuoteChar\u003d\u003c\").append(quoteCharacter).append(\u0027\u003e\u0027);\r\n    }\r\n    if (quoteMode !\u003d null) {\r\n        sb.append(\u0027 \u0027);\r\n        sb.append(\"QuoteMode\u003d\u003c\").append(quoteMode).append(\u0027\u003e\u0027);\r\n    }\r\n    if (isCommentMarkerSet()) {\r\n        sb.append(\u0027 \u0027);\r\n        sb.append(\"CommentStart\u003d\u003c\").append(commentMarker).append(\u0027\u003e\u0027);\r\n    }\r\n    if (isNullStringSet()) {\r\n        sb.append(\u0027 \u0027);\r\n        sb.append(\"NullString\u003d\u003c\").append(nullString).append(\u0027\u003e\u0027);\r\n    }\r\n    if (recordSeparator !\u003d null) {\r\n        sb.append(\u0027 \u0027);\r\n        sb.append(\"RecordSeparator\u003d\u003c\").append(recordSeparator).append(\u0027\u003e\u0027);\r\n    }\r\n    if (getIgnoreEmptyLines()) {\r\n        sb.append(\" EmptyLines:ignored\");\r\n    }\r\n    if (getIgnoreSurroundingSpaces()) {\r\n        sb.append(\" SurroundingSpaces:ignored\");\r\n    }\r\n    if (getIgnoreHeaderCase()) {\r\n        sb.append(\" IgnoreHeaderCase:ignored\");\r\n    }\r\n    sb.append(\" SkipHeaderRecord:\").append(skipHeaderRecord);\r\n    if (headerComments !\u003d null) {\r\n        sb.append(\u0027 \u0027);\r\n        sb.append(\"HeaderComments:\").append(Arrays.toString(headerComments));\r\n    }\r\n    if (headers !\u003d null) {\r\n        sb.append(\u0027 \u0027);\r\n        sb.append(\"Header:\").append(Arrays.toString(headers));\r\n    }\r\n    return sb.toString();\r\n}",
+    "nodes": 23,
+    "edges": 33,
+    "cc": 12,
+    "flowSummary": [
+      "B0 : If($z0 \u003d\u003d false) → B1 | else → B2",
+      "B2 : If($z1 \u003d\u003d false) → B3 | else → B4",
+      "B4 : If($r5 \u003d\u003d null) → B5 | else → B6",
+      "B6 : If($z2 \u003d\u003d false) → B7 | else → B8",
+      "B8 : If($z3 \u003d\u003d false) → B9 | else → B10",
+      "B10 : If($r6 \u003d\u003d null) → B11 | else → B12",
+      "B12 : If($z4 \u003d\u003d false) → B13 | else → B14",
+      "B14 : If($z5 \u003d\u003d false) → B15 | else → B16",
+      "B16 : If($z6 \u003d\u003d false) → B17 | else → B18",
+      "B18 : If($r8 \u003d\u003d null) → B19 | else → B20",
+      "B20 : If($r9 \u003d\u003d null) → B21 | else → B22"
+    ],
+    "blockList": [
+      "B0 {\n  CSVFormat\n  $r0 \u003d StringBuilder\n  new StringBuilder()\n  $r3 \u003d $r0.append(\"Delimiter\u003d\u003c\")\n  $r2 \u003d String delimiter\u003e\n  $r4 \u003d $r3.append($r2)\n  $r4.append(62)\n  $z0 \u003d r1.isEscapeCharacterSet()\n  if ($z0 \u003d\u003d false) goto B1 else B2\n}",
+      "B1 {\n  $r0.append(32)\n  $r33 \u003d $r0.append(\"Escape\u003d\u003c\")\n  $r32 \u003d Character escapeCharacter\u003e\n  $r34 \u003d $r33.append($r32)\n  $r34.append(62)\n}",
+      "B2 {\n  $z1 \u003d r1.isQuoteCharacterSet()\n  if ($z1 \u003d\u003d false) goto B3 else B4\n}",
+      "B3 {\n  $r0.append(32)\n  $r30 \u003d $r0.append(\"QuoteChar\u003d\u003c\")\n  $r29 \u003d Character quoteCharacter\u003e\n  $r31 \u003d $r30.append($r29)\n  $r31.append(62)\n}",
+      "B4 {\n  $r5 \u003d QuoteMode quoteMode\u003e\n  if ($r5 \u003d\u003d null) goto B5 else B6\n}",
+      "B5 {\n  $r0.append(32)\n  $r27 \u003d $r0.append(\"QuoteMode\u003d\u003c\")\n  $r26 \u003d QuoteMode quoteMode\u003e\n  $r28 \u003d $r27.append($r26)\n  $r28.append(62)\n}",
+      "B6 {\n  $z2 \u003d r1.isCommentMarkerSet()\n  if ($z2 \u003d\u003d false) goto B7 else B8\n}",
+      "B7 {\n  $r0.append(32)\n  $r24 \u003d $r0.append(\"CommentStart\u003d\u003c\")\n  $r23 \u003d Character commentMarker\u003e\n  $r25 \u003d $r24.append($r23)\n  $r25.append(62)\n}",
+      "B8 {\n  $z3 \u003d r1.isNullStringSet()\n  if ($z3 \u003d\u003d false) goto B9 else B10\n}",
+      "B9 {\n  $r0.append(32)\n  $r21 \u003d $r0.append(\"NullString\u003d\u003c\")\n  $r20 \u003d String nullString\u003e\n  $r22 \u003d $r21.append($r20)\n  $r22.append(62)\n}",
+      "B10 {\n  $r6 \u003d String recordSeparator\u003e\n  if ($r6 \u003d\u003d null) goto B11 else B12\n}",
+      "B11 {\n  $r0.append(32)\n  $r18 \u003d $r0.append(\"RecordSeparator\u003d\u003c\")\n  $r17 \u003d String recordSeparator\u003e\n  $r19 \u003d $r18.append($r17)\n  $r19.append(62)\n}",
+      "B12 {\n  $z4 \u003d r1.getIgnoreEmptyLines()\n  if ($z4 \u003d\u003d false) goto B13 else B14\n}",
+      "B13 {\n  $r0.append(\" EmptyLines:ignored\")\n}",
+      "B14 {\n  $z5 \u003d r1.getIgnoreSurroundingSpaces()\n  if ($z5 \u003d\u003d false) goto B15 else B16\n}",
+      "B15 {\n  $r0.append(\" SurroundingSpaces:ignored\")\n}",
+      "B16 {\n  $z6 \u003d r1.getIgnoreHeaderCase()\n  if ($z6 \u003d\u003d false) goto B17 else B18\n}",
+      "B17 {\n  $r0.append(\" IgnoreHeaderCase:ignored\")\n}",
+      "B18 {\n  $r7 \u003d $r0.append(\" SkipHeaderRecord:\")\n  $z7 \u003d CSVFormat: boolean skipHeaderRecord\u003e\n  $r7.append($z7)\n  $r8 \u003d String[] headerComments\u003e\n  if ($r8 \u003d\u003d null) goto B19 else B20\n}",
+      "B19 {\n  $r0.append(32)\n  $r16 \u003d $r0.append(\"HeaderComments:\")\n  $r14 \u003d String[] headerComments\u003e\n  $r15 \u003d Arrays.toString($r14)\n  $r16.append($r15)\n}",
+      "B20 {\n  $r9 \u003d String[] headers\u003e\n  if ($r9 \u003d\u003d null) goto B21 else B22\n}",
+      "B21 {\n  $r0.append(32)\n  $r13 \u003d $r0.append(\"Header:\")\n  $r11 \u003d String[] headers\u003e\n  $r12 \u003d Arrays.toString($r11)\n  $r13.append($r12)\n}",
+      "B22 {\n  $r10 \u003d $r0.toString()\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B2",
+      "B2 --\u003e B3",
+      "B2 --\u003e B4",
+      "B3 --\u003e B4",
+      "B4 --\u003e B5",
+      "B4 --\u003e B6",
+      "B5 --\u003e B6",
+      "B6 --\u003e B7",
+      "B6 --\u003e B8",
+      "B7 --\u003e B8",
+      "B8 --\u003e B9",
+      "B8 --\u003e B10",
+      "B9 --\u003e B10",
+      "B10 --\u003e B11",
+      "B10 --\u003e B12",
+      "B11 --\u003e B12",
+      "B12 --\u003e B13",
+      "B12 --\u003e B14",
+      "B13 --\u003e B14",
+      "B14 --\u003e B15",
+      "B14 --\u003e B16",
+      "B15 --\u003e B16",
+      "B16 --\u003e B17",
+      "B16 --\u003e B18",
+      "B17 --\u003e B18",
+      "B18 --\u003e B19",
+      "B18 --\u003e B20",
+      "B19 --\u003e B20",
+      "B20 --\u003e B21",
+      "B20 --\u003e B22",
+      "B21 --\u003e B22",
+      "B22 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVFormat#isCommentMarkerSet(...0)",
+        "body": "{\r\n    return commentMarker !\u003d null;\r\n}"
+      },
+      {
+        "name": "CSVFormat#getIgnoreHeaderCase(...0)",
+        "body": "{\r\n    return ignoreHeaderCase;\r\n}"
+      },
+      {
+        "name": "CSVFormat#isNullStringSet(...0)",
+        "body": "{\r\n    return nullString !\u003d null;\r\n}"
+      },
+      {
+        "name": "CSVFormat#isEscapeCharacterSet(...0)",
+        "body": "{\r\n    return escapeCharacter !\u003d null;\r\n}"
+      },
+      {
+        "name": "CSVFormat#isQuoteCharacterSet(...0)",
+        "body": "{\r\n    return quoteCharacter !\u003d null;\r\n}"
+      },
+      {
+        "name": "CSVFormat#getIgnoreEmptyLines(...0)",
+        "body": "{\r\n    return ignoreEmptyLines;\r\n}"
+      },
+      {
+        "name": "CSVFormat#getIgnoreSurroundingSpaces(...0)",
+        "body": "{\r\n    return ignoreSurroundingSpaces;\r\n}"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVFormat",
+    "methodName": "withAllowDuplicateHeaderNames",
+    "signature": "org.apache.commons.csv.CSVFormat withAllowDuplicateHeaderNames(boolean)",
+    "visibility": "public",
+    "body": "{\r\n    final DuplicateHeaderMode mode \u003d allowDuplicateHeaderNames ? DuplicateHeaderMode.ALLOW_ALL : DuplicateHeaderMode.ALLOW_EMPTY;\r\n    return builder().setDuplicateHeaderMode(mode).build();\r\n}",
+    "nodes": 4,
+    "edges": 4,
+    "cc": 2,
+    "flowSummary": [
+      "B0 : If(z0 \u003d\u003d false) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVFormat\n  z0 :\u003d @parameter0: boolean\n  if (z0 \u003d\u003d false) goto B1 else B2\n}",
+      "B1 {\n  $r4 \u003d DuplicateHeaderMode ALLOW_ALL\u003e\n  goto B3\n}",
+      "B2 {\n  $r4 \u003d DuplicateHeaderMode ALLOW_EMPTY\u003e\n}",
+      "B3 {\n  $r1 \u003d r0.builder()\n  $r2 \u003d $r1.setDuplicateHeaderMode($r4)\n  $r3 \u003d $r2.build()\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B3",
+      "B3 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVFormat#builder(...0)",
+        "body": "{\r\n    return Builder.create(this);\r\n}"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVParser",
+    "methodName": "close",
+    "signature": "void close()",
+    "visibility": "public",
+    "body": "{\r\n    if (this.lexer !\u003d null) {\r\n        this.lexer.close();\r\n    }\r\n}",
+    "nodes": 3,
+    "edges": 3,
+    "cc": 2,
+    "flowSummary": [
+      "B0 : If($r1 \u003d\u003d null) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVParser\n  $r1 \u003d Lexer lexer\u003e\n  if ($r1 \u003d\u003d null) goto B1 else B2\n}",
+      "B1 {\n  $r2 \u003d Lexer lexer\u003e\n  $r2.close()\n}",
+      "B2 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B2",
+      "B2 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": []
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVParser",
+    "methodName": "getHeaderMap",
+    "signature": "java.util.Map getHeaderMap()",
+    "visibility": "public",
+    "body": "{\r\n    if (this.headers.headerMap \u003d\u003d null) {\r\n        return null;\r\n    }\r\n    final Map\u003cString, Integer\u003e map \u003d createEmptyHeaderMap();\r\n    map.putAll(this.headers.headerMap);\r\n    return map;\r\n}",
+    "nodes": 3,
+    "edges": 2,
+    "cc": 1,
+    "flowSummary": [
+      "B0 : If($r2 !\u003d null) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVParser\n  $r1 \u003d CSVParser$Headers headers\u003e\n  $r2 \u003d Map headerMap\u003e\n  if ($r2 !\u003d null) goto B1 else B2\n}",
+      "B1 {\n  return\n}",
+      "B2 {\n  r3 \u003d r0.createEmptyHeaderMap()\n  $r4 \u003d CSVParser$Headers headers\u003e\n  $r5 \u003d Map headerMap\u003e\n  r3.putAll($r5)\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e [EXIT]",
+      "B2 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVParser#createEmptyHeaderMap(...0)",
+        "body": "{\r\n    return this.format.getIgnoreHeaderCase() ? new TreeMap\u003c\u003e(String.CASE_INSENSITIVE_ORDER) : new LinkedHashMap\u003c\u003e();\r\n}"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVParser",
+    "methodName": "hasHeaderComment",
+    "signature": "boolean hasHeaderComment()",
+    "visibility": "public",
+    "body": "{\r\n    return headerComment !\u003d null;\r\n}",
+    "nodes": 4,
+    "edges": 4,
+    "cc": 2,
+    "flowSummary": [
+      "B0 : If($r1 \u003d\u003d null) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVParser\n  $r1 \u003d String headerComment\u003e\n  if ($r1 \u003d\u003d null) goto B1 else B2\n}",
+      "B1 {\n  $z0 \u003d 1\n  goto B3\n}",
+      "B2 {\n  $z0 \u003d 0\n}",
+      "B3 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B3",
+      "B3 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": []
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVParser",
+    "methodName": "hasTrailerComment",
+    "signature": "boolean hasTrailerComment()",
+    "visibility": "public",
+    "body": "{\r\n    return trailerComment !\u003d null;\r\n}",
+    "nodes": 4,
+    "edges": 4,
+    "cc": 2,
+    "flowSummary": [
+      "B0 : If($r1 \u003d\u003d null) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVParser\n  $r1 \u003d String trailerComment\u003e\n  if ($r1 \u003d\u003d null) goto B1 else B2\n}",
+      "B1 {\n  $z0 \u003d 1\n  goto B3\n}",
+      "B2 {\n  $z0 \u003d 0\n}",
+      "B3 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B3",
+      "B3 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": []
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVPrinter",
+    "methodName": "close",
+    "signature": "void close(boolean)",
+    "visibility": "public",
+    "body": "{\r\n    if (flush || format.getAutoFlush()) {\r\n        flush();\r\n    }\r\n    if (appendable instanceof Closeable) {\r\n        ((Closeable) appendable).close();\r\n    }\r\n}",
+    "nodes": 6,
+    "edges": 8,
+    "cc": 4,
+    "flowSummary": [
+      "B0 : If(z0 !\u003d 0) → B1 | else → B2",
+      "B1 : If($z1 \u003d\u003d false) → B2 | else → B3",
+      "B3 : If($z2 \u003d\u003d false) → B4 | else → B5"
+    ],
+    "blockList": [
+      "B0 {\n  CSVPrinter\n  z0 :\u003d @parameter0: boolean\n  if (z0 !\u003d 0) goto B1 else B2\n}",
+      "B1 {\n  $r3 \u003d CSVFormat format\u003e\n  $z1 \u003d $r3.getAutoFlush()\n  if ($z1 \u003d\u003d false) goto B2 else B3\n}",
+      "B2 {\n  r0.flush()\n}",
+      "B3 {\n  $r4 \u003d Appendable appendable\u003e\n  $z2 \u003d Closeable\n  if ($z2 \u003d\u003d false) goto B4 else B5\n}",
+      "B4 {\n  $r1 \u003d Appendable appendable\u003e\n  $r2 \u003d Closeable) $r1\n  $r2.close()\n}",
+      "B5 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B3",
+      "B3 --\u003e B4",
+      "B3 --\u003e B5",
+      "B4 --\u003e B5",
+      "B5 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVPrinter#flush(...0)",
+        "body": "{\r\n    if (appendable instanceof Flushable) {\r\n        ((Flushable) appendable).flush();\r\n    }\r\n}"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVPrinter",
+    "methodName": "flush",
+    "signature": "void flush()",
+    "visibility": "public",
+    "body": "{\r\n    if (appendable instanceof Flushable) {\r\n        ((Flushable) appendable).flush();\r\n    }\r\n}",
+    "nodes": 3,
+    "edges": 3,
+    "cc": 2,
+    "flowSummary": [
+      "B0 : If($z0 \u003d\u003d false) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVPrinter\n  $r1 \u003d Appendable appendable\u003e\n  $z0 \u003d Flushable\n  if ($z0 \u003d\u003d false) goto B1 else B2\n}",
+      "B1 {\n  $r2 \u003d Appendable appendable\u003e\n  $r3 \u003d Flushable) $r2\n  $r3.flush()\n}",
+      "B2 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B2",
+      "B2 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": []
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVPrinter",
+    "methodName": "printComment",
+    "signature": "void printComment(java.lang.String)",
+    "visibility": "public",
+    "body": "{\r\n    if (comment \u003d\u003d null || !format.isCommentMarkerSet()) {\r\n        return;\r\n    }\r\n    if (!newRecord) {\r\n        println();\r\n    }\r\n    appendable.append(format.getCommentMarker().charValue());\r\n    appendable.append(SP);\r\n    for (int i \u003d 0; i \u003c comment.length(); i++) {\r\n        final char c \u003d comment.charAt(i);\r\n        switch(c) {\r\n            case CR:\r\n                if (i + 1 \u003c comment.length() \u0026\u0026 comment.charAt(i + 1) \u003d\u003d LF) {\r\n                    i++;\r\n                }\r\n            //$FALL-THROUGH$ break intentionally excluded.\r\n            case LF:\r\n                println();\r\n                appendable.append(format.getCommentMarker().charValue());\r\n                appendable.append(SP);\r\n                break;\r\n            default:\r\n                appendable.append(c);\r\n                break;\r\n        }\r\n    }\r\n    println();\r\n}",
+    "nodes": 15,
+    "edges": 21,
+    "cc": 8,
+    "flowSummary": [
+      "B0 : If(r0 \u003d\u003d null) → B1 | else → B2",
+      "B1 : If($z0 !\u003d 0) → B2 | else → B3",
+      "B3 : If($z1 !\u003d 0) → B4 | else → B5",
+      "B6 : If(i6 \u003e\u003d $i7) → B7 | else → B14",
+      "B7 : If(switch-on $i9) → B11 | else → B8",
+      "B8 : If($i3 \u003e\u003d $i2) → B9 | else → B11",
+      "B9 : If($i10 !\u003d 10) → B10 | else → B11"
+    ],
+    "blockList": [
+      "B0 {\n  CSVPrinter\n  String\n  if (r0 \u003d\u003d null) goto B1 else B2\n}",
+      "B1 {\n  $r2 \u003d CSVFormat format\u003e\n  $z0 \u003d $r2.isCommentMarkerSet()\n  if ($z0 !\u003d 0) goto B2 else B3\n}",
+      "B2 {\n  return\n}",
+      "B3 {\n  $z1 \u003d CSVPrinter: boolean newRecord\u003e\n  if ($z1 !\u003d 0) goto B4 else B5\n}",
+      "B4 {\n  r1.println()\n}",
+      "B5 {\n  $r4 \u003d Appendable appendable\u003e\n  $r3 \u003d CSVFormat format\u003e\n  $r5 \u003d $r3.getCommentMarker()\n  $c0 \u003d $r5.charValue()\n  $r4.append($c0)\n  $r6 \u003d Appendable appendable\u003e\n  $r6.append(32)\n  i6 \u003d 0\n}",
+      "B6 {\n  $i7 \u003d r0.length()\n  if (i6 \u003e\u003d $i7) goto B7 else B14\n}",
+      "B7 {\n  c1 \u003d r0.charAt(i6)\n  $i9 \u003d (int) c1\n  Appendable appendable\u003e; }\n}",
+      "B8 {\n  $i3 \u003d i6 + 1\n  $i2 \u003d r0.length()\n  if ($i3 \u003e\u003d $i2) goto B9 else B11\n}",
+      "B9 {\n  $i4 \u003d i6 + 1\n  $c5 \u003d r0.charAt($i4)\n  $i10 \u003d (int) $c5\n  if ($i10 !\u003d 10) goto B10 else B11\n}",
+      "B10 {\n  i6 \u003d i6 + 1\n}",
+      "B11 {\n  r1.println()\n  $r8 \u003d Appendable appendable\u003e\n  $r9 \u003d CSVFormat format\u003e\n  $r10 \u003d $r9.getCommentMarker()\n  $c8 \u003d $r10.charValue()\n  $r8.append($c8)\n  $r11 \u003d Appendable appendable\u003e\n  $r11.append(32)\n  goto B13\n}",
+      "B12 {\n  $r7 \u003d Appendable appendable\u003e\n  $r7.append(c1)\n}",
+      "B13 {\n  i6 \u003d i6 + 1\n  goto B6\n}",
+      "B14 {\n  r1.println()\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e [EXIT]",
+      "B3 --\u003e B4",
+      "B3 --\u003e B5",
+      "B4 --\u003e B5",
+      "B5 --\u003e B6",
+      "B6 --\u003e B7",
+      "B6 --\u003e B14",
+      "B7 --\u003e B11",
+      "B7 --\u003e B8",
+      "B7 --\u003e B12",
+      "B8 --\u003e B9",
+      "B8 --\u003e B11",
+      "B9 --\u003e B10",
+      "B9 --\u003e B11",
+      "B10 --\u003e B11",
+      "B11 --\u003e B13",
+      "B12 --\u003e B13",
+      "B13 --\u003e B6",
+      "B14 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVPrinter#println(...0)",
+        "body": "{\r\n    format.println(appendable);\r\n    newRecord \u003d true;\r\n}"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVPrinter",
+    "methodName": "printRecord",
+    "signature": "void printRecord(java.lang.Iterable)",
+    "visibility": "public",
+    "body": "{\r\n    for (final Object value : values) {\r\n        print(value);\r\n    }\r\n    println();\r\n}",
+    "nodes": 4,
+    "edges": 4,
+    "cc": 2,
+    "flowSummary": [
+      "B1 : If($z0 \u003d\u003d false) → B2 | else → B3"
+    ],
+    "blockList": [
+      "B0 {\n  CSVPrinter\n  Iterable\n  r1 \u003d r0.iterator()\n}",
+      "B1 {\n  $z0 \u003d r1.hasNext()\n  if ($z0 \u003d\u003d false) goto B2 else B3\n}",
+      "B2 {\n  r3 \u003d r1.next()\n  r2.print(r3)\n  goto B1\n}",
+      "B3 {\n  r2.println()\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B1 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B1",
+      "B3 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVPrinter#print(...1)",
+        "body": "{\r\n    format.print(value, appendable, newRecord);\r\n    newRecord \u003d false;\r\n}"
+      },
+      {
+        "name": "CSVPrinter#println(...0)",
+        "body": "{\r\n    format.println(appendable);\r\n    newRecord \u003d true;\r\n}"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVPrinter",
+    "methodName": "printRecords",
+    "signature": "void printRecords(java.lang.Iterable)",
+    "visibility": "public",
+    "body": "{\r\n    for (final Object value : values) {\r\n        printRecordObject(value);\r\n    }\r\n}",
+    "nodes": 4,
+    "edges": 4,
+    "cc": 2,
+    "flowSummary": [
+      "B1 : If($z0 \u003d\u003d false) → B2 | else → B3"
+    ],
+    "blockList": [
+      "B0 {\n  CSVPrinter\n  Iterable\n  r1 \u003d r0.iterator()\n}",
+      "B1 {\n  $z0 \u003d r1.hasNext()\n  if ($z0 \u003d\u003d false) goto B2 else B3\n}",
+      "B2 {\n  r2 \u003d r1.next()\n  r3.printRecordObject(r2)\n  goto B1\n}",
+      "B3 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B1 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B1",
+      "B3 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVPrinter#printRecordObject(...1)",
+        "body": "{\r\n    if (value instanceof Object[]) {\r\n        this.printRecord((Object[]) value);\r\n    } else if (value instanceof Iterable) {\r\n        this.printRecord((Iterable\u003c?\u003e) value);\r\n    } else {\r\n        this.printRecord(value);\r\n    }\r\n}"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVPrinter",
+    "methodName": "printRecords",
+    "signature": "void printRecords(java.sql.ResultSet)",
+    "visibility": "public",
+    "body": "{\r\n    final int columnCount \u003d resultSet.getMetaData().getColumnCount();\r\n    while (resultSet.next()) {\r\n        for (int i \u003d 1; i \u003c\u003d columnCount; i++) {\r\n            final Object object \u003d resultSet.getObject(i);\r\n            // TODO Who manages the Clob? The JDBC driver or must we close it? Is it driver-dependent?\r\n            print(object instanceof Clob ? ((Clob) object).getCharacterStream() : object);\r\n        }\r\n        println();\r\n    }\r\n}",
+    "nodes": 10,
+    "edges": 12,
+    "cc": 4,
+    "flowSummary": [
+      "B1 : If($z0 \u003d\u003d false) → B2 | else → B9",
+      "B3 : If(i1 \u003e i0) → B4 | else → B8",
+      "B4 : If($z1 \u003d\u003d false) → B5 | else → B6"
+    ],
+    "blockList": [
+      "B0 {\n  CSVPrinter\n  ResultSet\n  $r1 \u003d r0.getMetaData()\n  i0 \u003d $r1.getColumnCount()\n}",
+      "B1 {\n  $z0 \u003d r0.next()\n  if ($z0 \u003d\u003d false) goto B2 else B9\n}",
+      "B2 {\n  i1 \u003d 1\n}",
+      "B3 {\n  if (i1 \u003e i0) goto B4 else B8\n}",
+      "B4 {\n  r3 \u003d r0.getObject(i1)\n  $z1 \u003d Clob\n  if ($z1 \u003d\u003d false) goto B5 else B6\n}",
+      "B5 {\n  $r4 \u003d Clob) r3\n  $r5 \u003d $r4.getCharacterStream()\n  goto B7\n}",
+      "B6 {\n  $r5 \u003d r3\n}",
+      "B7 {\n  r2.print($r5)\n  i1 \u003d i1 + 1\n  goto B3\n}",
+      "B8 {\n  r2.println()\n  goto B1\n}",
+      "B9 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B1 --\u003e B2",
+      "B1 --\u003e B9",
+      "B2 --\u003e B3",
+      "B3 --\u003e B4",
+      "B3 --\u003e B8",
+      "B4 --\u003e B5",
+      "B4 --\u003e B6",
+      "B5 --\u003e B7",
+      "B6 --\u003e B7",
+      "B7 --\u003e B3",
+      "B8 --\u003e B1",
+      "B9 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVPrinter#print(...1)",
+        "body": "{\r\n    format.print(value, appendable, newRecord);\r\n    newRecord \u003d false;\r\n}"
+      },
+      {
+        "name": "CSVPrinter#println(...0)",
+        "body": "{\r\n    format.println(appendable);\r\n    newRecord \u003d true;\r\n}"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVPrinter",
+    "methodName": "printRecords",
+    "signature": "void printRecords(java.sql.ResultSet,boolean)",
+    "visibility": "public",
+    "body": "{\r\n    if (printHeader) {\r\n        printHeaders(resultSet);\r\n    }\r\n    printRecords(resultSet);\r\n}",
+    "nodes": 3,
+    "edges": 3,
+    "cc": 2,
+    "flowSummary": [
+      "B0 : If(z0 \u003d\u003d false) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVPrinter\n  ResultSet\n  z0 :\u003d @parameter1: boolean\n  if (z0 \u003d\u003d false) goto B1 else B2\n}",
+      "B1 {\n  r0.printHeaders(r1)\n}",
+      "B2 {\n  r0.printRecords(r1)\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B2",
+      "B2 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVPrinter#printHeaders(...1)",
+        "body": "{\r\n    printRecord((Object[]) format.builder().setHeader(resultSet).build().getHeader());\r\n}"
+      },
+      {
+        "name": "CSVPrinter#printRecords(...1)",
+        "body": "{\r\n    for (final Object value : values) {\r\n        printRecordObject(value);\r\n    }\r\n}"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVRecord",
+    "methodName": "get",
+    "signature": "java.lang.String get(java.lang.Enum)",
+    "visibility": "public",
+    "body": "{\r\n    return get(e \u003d\u003d null ? null : e.name());\r\n}",
+    "nodes": 4,
+    "edges": 4,
+    "cc": 2,
+    "flowSummary": [
+      "B0 : If(r1 !\u003d null) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVRecord\n  Enum\n  if (r1 !\u003d null) goto B1 else B2\n}",
+      "B1 {\n  $r3 \u003d null\n  goto B3\n}",
+      "B2 {\n  $r3 \u003d r1.name()\n}",
+      "B3 {\n  $r2 \u003d r0.get($r3)\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B3",
+      "B3 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVRecord#get(...1)",
+        "body": "{\r\n    return get(e \u003d\u003d null ? null : e.name());\r\n}"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVRecord",
+    "methodName": "hasComment",
+    "signature": "boolean hasComment()",
+    "visibility": "public",
+    "body": "{\r\n    return comment !\u003d null;\r\n}",
+    "nodes": 4,
+    "edges": 4,
+    "cc": 2,
+    "flowSummary": [
+      "B0 : If($r1 \u003d\u003d null) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVRecord\n  $r1 \u003d String comment\u003e\n  if ($r1 \u003d\u003d null) goto B1 else B2\n}",
+      "B1 {\n  $z0 \u003d 1\n  goto B3\n}",
+      "B2 {\n  $z0 \u003d 0\n}",
+      "B3 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B3",
+      "B3 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": []
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVRecord",
+    "methodName": "isConsistent",
+    "signature": "boolean isConsistent()",
+    "visibility": "public",
+    "body": "{\r\n    final Map\u003cString, Integer\u003e headerMap \u003d getHeaderMapRaw();\r\n    return headerMap \u003d\u003d null || headerMap.size() \u003d\u003d values.length;\r\n}",
+    "nodes": 5,
+    "edges": 6,
+    "cc": 3,
+    "flowSummary": [
+      "B0 : If(r1 \u003d\u003d null) → B1 | else → B2",
+      "B1 : If($i1 !\u003d $i0) → B2 | else → B3"
+    ],
+    "blockList": [
+      "B0 {\n  CSVRecord\n  r1 \u003d r0.getHeaderMapRaw()\n  if (r1 \u003d\u003d null) goto B1 else B2\n}",
+      "B1 {\n  $i1 \u003d r1.size()\n  $r2 \u003d String[] values\u003e\n  $i0 \u003d lengthof $r2\n  if ($i1 !\u003d $i0) goto B2 else B3\n}",
+      "B2 {\n  $z0 \u003d 1\n  goto B4\n}",
+      "B3 {\n  $z0 \u003d 0\n}",
+      "B4 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B4",
+      "B3 --\u003e B4",
+      "B4 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVRecord#getHeaderMapRaw(...0)",
+        "body": "{\r\n    return parser \u003d\u003d null ? null : parser.getHeaderMapRaw();\r\n}"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVRecord",
+    "methodName": "isMapped",
+    "signature": "boolean isMapped(java.lang.String)",
+    "visibility": "public",
+    "body": "{\r\n    final Map\u003cString, Integer\u003e headerMap \u003d getHeaderMapRaw();\r\n    return headerMap !\u003d null \u0026\u0026 headerMap.containsKey(name);\r\n}",
+    "nodes": 5,
+    "edges": 6,
+    "cc": 3,
+    "flowSummary": [
+      "B0 : If(r1 \u003d\u003d null) → B1 | else → B3",
+      "B1 : If($z0 \u003d\u003d false) → B2 | else → B3"
+    ],
+    "blockList": [
+      "B0 {\n  CSVRecord\n  String\n  r1 \u003d r0.getHeaderMapRaw()\n  if (r1 \u003d\u003d null) goto B1 else B3\n}",
+      "B1 {\n  $z0 \u003d r1.containsKey(r2)\n  if ($z0 \u003d\u003d false) goto B2 else B3\n}",
+      "B2 {\n  $z1 \u003d 1\n  goto B4\n}",
+      "B3 {\n  $z1 \u003d 0\n}",
+      "B4 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B3",
+      "B1 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B4",
+      "B3 --\u003e B4",
+      "B4 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVRecord#getHeaderMapRaw(...0)",
+        "body": "{\r\n    return parser \u003d\u003d null ? null : parser.getHeaderMapRaw();\r\n}"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVRecord",
+    "methodName": "isSet",
+    "signature": "boolean isSet(int)",
+    "visibility": "public",
+    "body": "{\r\n    return 0 \u003c\u003d index \u0026\u0026 index \u003c values.length;\r\n}",
+    "nodes": 5,
+    "edges": 6,
+    "cc": 3,
+    "flowSummary": [
+      "B0 : If(0 \u003e i0) → B1 | else → B3",
+      "B1 : If(i0 \u003e\u003d $i1) → B2 | else → B3"
+    ],
+    "blockList": [
+      "B0 {\n  CSVRecord\n  i0 :\u003d @parameter0: int\n  if (0 \u003e i0) goto B1 else B3\n}",
+      "B1 {\n  $r1 \u003d String[] values\u003e\n  $i1 \u003d lengthof $r1\n  if (i0 \u003e\u003d $i1) goto B2 else B3\n}",
+      "B2 {\n  $z0 \u003d 1\n  goto B4\n}",
+      "B3 {\n  $z0 \u003d 0\n}",
+      "B4 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B3",
+      "B1 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B4",
+      "B3 --\u003e B4",
+      "B4 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": []
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVRecord",
+    "methodName": "isSet",
+    "signature": "boolean isSet(java.lang.String)",
+    "visibility": "public",
+    "body": "{\r\n    return isMapped(name) \u0026\u0026 getHeaderMapRaw().get(name).intValue() \u003c values.length;\r\n}",
+    "nodes": 5,
+    "edges": 6,
+    "cc": 3,
+    "flowSummary": [
+      "B0 : If($z0 \u003d\u003d false) → B1 | else → B3",
+      "B1 : If($i1 \u003e\u003d $i0) → B2 | else → B3"
+    ],
+    "blockList": [
+      "B0 {\n  CSVRecord\n  String\n  $z0 \u003d r0.isMapped(r1)\n  if ($z0 \u003d\u003d false) goto B1 else B3\n}",
+      "B1 {\n  $r2 \u003d r0.getHeaderMapRaw()\n  $r3 \u003d $r2.get(r1)\n  $r4 \u003d Integer) $r3\n  $i1 \u003d $r4.intValue()\n  $r5 \u003d String[] values\u003e\n  $i0 \u003d lengthof $r5\n  if ($i1 \u003e\u003d $i0) goto B2 else B3\n}",
+      "B2 {\n  $z1 \u003d 1\n  goto B4\n}",
+      "B3 {\n  $z1 \u003d 0\n}",
+      "B4 {\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B3",
+      "B1 --\u003e B2",
+      "B1 --\u003e B3",
+      "B2 --\u003e B4",
+      "B3 --\u003e B4",
+      "B4 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": [
+      {
+        "name": "CSVRecord#getHeaderMapRaw(...0)",
+        "body": "{\r\n    return parser \u003d\u003d null ? null : parser.getHeaderMapRaw();\r\n}"
+      },
+      {
+        "name": "CSVRecord#isMapped(...1)",
+        "body": "{\r\n    final Map\u003cString, Integer\u003e headerMap \u003d getHeaderMapRaw();\r\n    return headerMap !\u003d null \u0026\u0026 headerMap.containsKey(name);\r\n}"
+      }
+    ]
+  },
+  {
+    "clazz": "org.apache.commons.csv.CSVRecord",
+    "methodName": "putIn",
+    "signature": "java.util.Map putIn(java.util.Map)",
+    "visibility": "public",
+    "body": "(source not found)",
+    "nodes": 3,
+    "edges": 2,
+    "cc": 1,
+    "flowSummary": [
+      "B0 : If($r1 !\u003d null) → B1 | else → B2"
+    ],
+    "blockList": [
+      "B0 {\n  CSVRecord\n  Map\n  $r1 \u003d r0.getHeaderMapRaw()\n  if ($r1 !\u003d null) goto B1 else B2\n}",
+      "B1 {\n  return\n}",
+      "B2 {\n  $r4 \u003d r0.getHeaderMapRaw()\n  $r3 \u003d CSVRecord$lambda_putIn_0__3.bootstrap$(r0, r2)\n  $r4.forEach($r3)\n  return\n}"
+    ],
+    "blockEdges": [
+      "B0 --\u003e B1",
+      "B0 --\u003e B2",
+      "B1 --\u003e [EXIT]",
+      "B2 --\u003e [EXIT]"
+    ],
+    "depClasses": [],
+    "depMethods": []
+  }
+]

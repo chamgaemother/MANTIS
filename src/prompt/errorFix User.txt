@@ -1,0 +1,56 @@
+[Role]
+Below is the original Java class containing the target method, the existing JUnit 5 test code, and the failed compile or runtime error message log. Your task is to fix the test code so that it compiles and runs correctly.
+
+[Input]
+- Library Name → { Library Name }
+- Class Name → { CLASS_NAME }
+- Class body    → { CLASS_BODY }
+- Target Method → { METHOD_NAME }
+- Visibility → { VISIBILITY }
+- Method Signature → { METHOD_SIGNATURE }
+- Target Method Body → { METHOD_BODY }
+- CFG Information → N: { NODE }, E: { EDGE }, CC: { CYCLOMATIC_COMPLEXITY }
+- Dependencies → { DEP_CLASS } { DEP_METHOD }
+
+[Requirement Summary]
+1. **Information**
+- Existing Unit Test Code: { Insert existing JUnit 5 test code here }
+- Error Log Message: { Insert compilation or runtime error log here }
+
+2. **Requirement**
+- Analyze error messages to determine the root cause and location of the error.
+- Modify the test code so that it compiles and runs successfully.
+- Do not change the number of scenarios.
+- Avoid unnecessary mocks or abstractions.
+- Do not make any changes that are not related to the error message.
+- Do NOT summarize or skip scenario.
+- Commented-out tests indicate test cases that experienced runtime errors or compilation errors.
+- Please ensure that no infinite loops occur.
+
+3. **End Results**
+- A single JUnit 5 test class that compiles and runs.
+- Add useful comments or use @DisplayName to clearly explain what has been changed or added.
+- Briefly summarize what has been changed and why.
+
+4. **Completeness**
+- Create a fully compilable JUnit 5 test class that can run without errors.
+- Include any necessary imports and reflection helpers as needed.
+- Name the class `public class { Class Name }_{ METHOD_NAME }_Test' and ensure that it targets the method of your choice.
+
+[Content/Description Provided]
+- The existing test code is partially broken or contains errors. A working version is needed.
+
+[Emphasis/Request]
+Minimize changes, but ensure that the code compiles and runs without errors.
+Never remove or omit existing scenario code that is not related to the error.
+
+[Output Format]
+Returns the result as a JSON object using the following format: ```json
+{
+"FixedTest": "<insert a fully functional JUnit 5 test class here>",
+"note": "<insert a summary of the changes>"
+}
+```
+
+Please enclose it in three backticks, like "json", for easy parsing.
+You should provide only one JSON file.

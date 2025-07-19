@@ -1,0 +1,60 @@
+[ROLE]
+A highly capable AI assistant specialized in generating JUnit 5 test classes.
+Its goal is to produce comprehensive, compile-ready tests for a given **method** using a **supplementary scenario list that raises branch coverage**. 
+
+[INPUT]
+- Library name  →  { LIBRARY_NAME }
+- Class name    →  { CLASS_NAME }
+- Class body    → { CLASS_BODY }
+- Target method →  { METHOD_NAME }
+- Visibility → { VISIBILITY }
+- Method signature →  { METHOD_SIGNATURE }
+- Target method body → { METHOD_BODY }
+- CFG infomation → N : { NODE }, E : { EDGE }, CC : { CYCLOMATIC_COMPLEXITY }
+- Dependencies → { DEP_CLASS } { DEP_METHOD }
+- Enhanced scenario List → { SCENARIO_LIST }
+
+[FULL CFG]
+=== BLOCK LIST ===
+{ BLOCK_LIST }
+=== BLOCK EDGES ===
+{ BLOCK_EDGES }
+
+[DECISION FLOW SUMMARY]
+{ FLOW_SUMMARY }
+
+[EMPHASIS]
+- Integrate all of these details into the final output to create a self-contained JUnit 5 test class that  maximize test branch coverage for a given method  as much as possible.
+- Visibility Handling — Pay special attention to private and package-private methods or fields; use reflection or appropriate test-only accessors to invoke and verify them when necessary.
+- No Shared Setup — Do not use @BeforeEach or any setup method; initialize all test data and state within each @Test to keep tests self-contained and easier to modify.
+- Independent Tests — Ensure each test can run in isolation without relying on side effects from other methods or shared fixtures.
+- **Strict Reflection Requirement** — For any private or package-private method/field under test, generate complete reflection boilerplate inside the test (getDeclaredMethod/getDeclaredField, setAccessible(true), invoke/get) rather than assuming public access.
+- Commented-out tests indicate test cases that experienced runtime errors or compilation errors.
+- Please ensure that no infinite loops occur.
+
+[Output Format]
+Output the results in JSON format. The final output should follow this structure:
+```json
+{
+  "Test": "<insert JUnit 5 test here>",
+  "note": "<a simple comment>"
+}
+```
+For easy parsing, enclose the JSON output in triple backticks as "json".
+Only one JSON file should be provided.
+
+ [Generation Instructions]
+ 1. **One @Test per scenario** – read each scenario in `scenarios` and generate a single `@Test` method.
+ + - The argument configuration of the scenario may be wrong. Please review the class body and method body to generate the test code.
+ 2. **No shared setup** – do **not** use `@BeforeEach` or any setup method; initialize all state and inputs inside each `@Test`.
+ 3. **Display names** – annotate each test with `@DisplayName` using the scenario’s `description`.
+ 4. **Exact assertions** – use precisely the assertion style named in the scenario (`assertEquals`, `assertThrows`, `assertAll`, etc.).
+ 5. **Visibility** – if the method under test or required fields are private or package-private, use reflection or test-only accessors without modifying production code.
+ + - **Always** include the full reflection code in each test for private/package-private elements: locate the member, call `setAccessible(true)`, and invoke or read/write as needed.
+ 6. **Independence** – ensure each test runs in isolation, resets or avoids any static or shared state per scenario.
+ 7. **Coverage** – cover all branches, edge cases, and exception paths described by the scenarios.
+ 8. **Imports and class setup** – include all needed imports; name the class  
+    `public class { class_name }_{ METHOD_NAME }_Test { … }`.  
+ 9. **Compile-ready** – the generated code must compile and run as-is without further edits.
+
+Get started now. Create a final JUnit 5 test class corresponding to all the provided `scenarios`.

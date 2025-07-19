@@ -11,10 +11,9 @@ import shutil
 
 from Utils import count_txt_files_in_scenarios, count_txt_files_in_enhance, count_txt_files_in_enhance2
 
-# 콘솔 출력 인코딩 설정
-SOURCE_DIR = "./result" # 복사할 원본 파일들이 있는 디렉터리
-############################################
-# 2) 도우미 함수들
+
+SOURCE_DIR = "./result" 
+
 ############################################
 
 IMPORT_FLAG = False
@@ -31,7 +30,7 @@ def jtype_to_desc(jtype:str)->str:
 
 
 def soot_to_desc(soot:str)->str:
-    # assumes "<cls: RetT name(param1,param2)>" form
+
     sig = soot.split(":")[1].strip(" >")
     ret, rest = sig.split(None,1)
     name, params = rest.split("(",1)
@@ -50,18 +49,18 @@ def parse_cannot_find_symbol(error_text):
 
     while i < len(lines):
         line = lines[i]
-        # 1) 파일 경로 찾기
+
         m_file = pat_file.search(line)
         if m_file:
             test_file_path = m_file.group(1)
-            # 2) 이어지는 줄(들)에서 "symbol: class XXX" 찾기
+ 
             j = i + 1
             found_class = None
             while j < len(lines):
                 m_sym = pat_symbol.search(lines[j])
                 if m_sym:
                     found_class = m_sym.group(1)
-                    # 찾으면 저장
+               
                     results.append((test_file_path, found_class))
                     break
                 j += 1
@@ -74,23 +73,20 @@ def parse_cannot_find_symbol(error_text):
 
 def get_src_main_folder(file_path):
 
-    norm = file_path.replace("\\", "/")  # 윈도우 경로도 슬래시로 통일
+    norm = file_path.replace("\\", "/") 
     if "src/" not in norm:
         print(f"[WARN] 'src/' not found in path: {file_path}")
         return None
 
     prefix = norm.split("src/")[0] 
     main_java_folder = os.path.join(prefix, "src", "main", "java")
-    # 슬래시 일관성
+
     main_java_folder = main_java_folder.replace("/", os.sep)
     return main_java_folder
 
 
 def find_java_file_by_classname(root_folder, class_name):
-    """
-    root_folder 아래서, class_name.java 파일을 찾는다.
-    첫 매칭 경로를 반환. 못 찾으면 None.
-    """
+
     root_folder = root_folder[1:]
     if not root_folder or not os.path.isdir(root_folder):
         print(f"[WARN] 잘못된 검색 루트: {root_folder}")
@@ -112,7 +108,7 @@ def parse_package_name(java_file_path):
         for line in f:
             line_strip = line.strip()
             if line_strip.startswith("package "):
-                # package net.datafaker.providers.something;
+    
                 pkg = line_strip.replace("package ", "").replace(";", "").strip()
                 return pkg
     return ""
@@ -129,7 +125,7 @@ def add_import_to_file(test_file_path, import_statement):
         with open(test_file_path, "r", encoding="utf-8") as f:
             lines = f.readlines()
 
-        # 중복 체크
+ 
         already_imported = any(import_statement in ln for ln in lines)
         if already_imported:
             print(f"[INFO] 이미 import된 {import_statement} in {test_file_path}")
@@ -144,7 +140,7 @@ def add_import_to_file(test_file_path, import_statement):
                 inserted = True
 
         if not inserted:
-            # package 없으면 맨 위에
+          
             new_lines.insert(0, import_statement + "\n")
 
         with open(test_file_path, "w", encoding="utf-8") as f:
@@ -154,8 +150,7 @@ def add_import_to_file(test_file_path, import_statement):
         
 
 
-############################################
-# 3) 최종 구동 함수
+
 ############################################
 
 def add_basic_import(test_file_paths: list, import_statement: str):
@@ -170,12 +165,12 @@ def add_basic_import(test_file_paths: list, import_statement: str):
 
         lines = path.read_text(encoding='utf-8').splitlines()
 
-        # 이미 같은 import 구문이 있는지 검사
+
         if any(line.strip() == import_statement for line in lines):
             print(f"[INFO] 이미 import가 존재함: {import_statement}")
             return
 
-        # package 구문 위치 찾기 (보통 한 줄 또는 여러 줄 위에 import가 옴)
+ 
         package_index = -1
         for i, line in enumerate(lines):
             if line.strip().startswith("package "):
@@ -184,10 +179,10 @@ def add_basic_import(test_file_paths: list, import_statement: str):
 
         insert_index = package_index + 1 if package_index >= 0 else 0
 
-        # import 문 추가 (빈 줄로 구분도 가능)
+     
         lines.insert(insert_index, import_statement)
 
-        # 수정된 파일 다시 쓰기
+    
         path.write_text("\n".join(lines), encoding='utf-8')
         print(f"[SUCCESS] import 추가됨: {import_statement} -> {test_file_path}")
         IMPORT_FLAG = True
@@ -202,25 +197,23 @@ def fix_missing_classes_with_dynamic_src(error_log_text):
 
 
         print(test_file_path, cls_name)
-        # 2) 테스트 파일로부터 src/main/java 루트 추출
+  
         src_main_folder = get_src_main_folder(test_file_path)
         if not src_main_folder:
             print(f"[ERROR] src/main/java 폴더를 추출하지 못함. ({test_file_path})")
             continue
 
-        # 3) 해당 루트에서 cls_name.java 찾기
+  
         matched = find_java_file_by_classname(src_main_folder, cls_name)
         if not matched:
             print(f"[ERROR] {cls_name}.java를 '{src_main_folder}'에서 찾지 못함.")
             continue
 
-        # 4) package 파싱
         pkg = parse_package_name(matched)
         if not pkg:
             print(f"[WARN] package 구문이 없는 파일: {matched}")
             continue
 
-        # 5) import 구문 생성 & 추가
         import_stmt = f"import {pkg}.{cls_name};"
         add_import_to_file(test_file_path, import_stmt)
     return missing_list
@@ -258,7 +251,7 @@ def run_coverage_for_class(row):
     method_name = row.get("method", "").strip()
     method_signiture = row.get("method_signiture", "").strip()
     test_path = row.get("test", "").strip()
-    if method_name == "method":  # CSV 헤더나 잘못된 값 거르기 용도
+    if method_name == "method": 
         return 0, return_Flag
     
     scenario_n = count_txt_files_in_scenarios()
@@ -267,7 +260,7 @@ def run_coverage_for_class(row):
     enhance2_n = count_txt_files_in_enhance2()
     target_classes = []
     target_files = []
-    for i in range(1, scenario_n+1): #기본 case
+    for i in range(1, scenario_n+1): 
         target_file = os.path.join(test_path, f"{class_name}_{method_name}_0_{i}_Test.java")
         t = f"{class_name}_{method_name}_0_{i}_Test"
         if os.path.exists(target_file):
@@ -275,7 +268,7 @@ def run_coverage_for_class(row):
             target_files.append(target_file)
         else:
             break
-    if scenario_n - java_n != 0: # 개선 된 Case
+    if scenario_n - java_n != 0: 
         for j in range(1, enhance_n+ 1):
             target_file = os.path.join(test_path, f"{class_name}_{method_name}_1_{j}_Test.java")
             t = f"{class_name}_{method_name}_1_{j}_Test"
@@ -285,7 +278,7 @@ def run_coverage_for_class(row):
             else:
                 break
 
-        if enhance2_n > 0: # 2번 개선 된 case
+        if enhance2_n > 0:
             for j in range(1, enhance2_n+ 1):
                 target_file = os.path.join(test_path, f"{class_name}_{method_name}_2_{j}_Test.java")
                 t = f"{class_name}_{method_name}_2_{j}_Test"
@@ -296,16 +289,16 @@ def run_coverage_for_class(row):
                     break
 
     target_file = ""
-    if scenario_n - java_n == 0: # 기본
+    if scenario_n - java_n == 0:
         target_file = os.path.join(test_path, f"{class_name}_{method_name}_0_{len(target_classes)}_Test.java")
-    elif enhance2_n == 0 : # 개선 케이스
+    elif enhance2_n == 0 : 
         target_file = os.path.join(test_path, f"{class_name}_{method_name}_1_{len(target_classes) - scenario_n}_Test.java")
     else :
         target_file = os.path.join(test_path, f"{class_name}_{method_name}_2_{len(target_classes) - scenario_n - enhance_n}_Test.java")
 
         
     target_class = ",".join(target_classes)
-    # 이거 이름 변경 잘 하기 !
+ 
         
     test_class_name = target_classes[-1]
 
@@ -313,7 +306,7 @@ def run_coverage_for_class(row):
     
     agt_test_folder = row["folder"]
     project_root = os.path.abspath(os.path.join(agt_test_folder, "..", ".."))
-    jdk_home       = r"C:\Users\00000\.jdks\corretto-17.0.15"  # 원하는 JDK 경로
+    jdk_home       = r"C:\Users\00000\.jdks\corretto-17.0.15" # your path in
 
     
     jacoco_cmd = "org.jacoco:jacoco-maven-plugin:report"
@@ -343,7 +336,7 @@ def run_coverage_for_class(row):
     print("[INFO] Project root :", project_root)
     print("[INFO] Running Maven:", " ".join(mvn_cmd))
 
-    if mvn_exe is None:                                   # ② 못 찾으면 wrapper 탐색
+    if mvn_exe is None:                                 
         wrapper = Path(project_root) / ("mvnw.cmd" if os.name == "nt" else "mvnw")
         if wrapper.exists():
             mvn_exe = str(wrapper)
@@ -353,13 +346,13 @@ def run_coverage_for_class(row):
                 "MAVEN_HOME/M2_HOME 설정 또는 mvnw(.cmd) 위치를 확인하세요."
             )
 
-    # 1) Maven 실행
+
     try:
         result = subprocess.run(
             " ".join(mvn_cmd),
             env=env,
             cwd=project_root,
-            shell=False,      # ★ 가장 중요
+            shell=False,
             capture_output=True,
             text=True,
             timeout=300 
@@ -368,18 +361,16 @@ def run_coverage_for_class(row):
         print(f"[ERROR] Maven execution failed for {method_name}:", e)
         return None, return_Flag
     
-    # 2) stderr / stdout 처리
+
     stdout_text = result.stdout
     stderr_text = result.stderr
 
-    # 로그 폴더
+
     log_dir = "./error_logs"
     os.makedirs(log_dir, exist_ok=True)
 
     if stderr_text != None:
-        # print(stderr_text)  # 화면에 에러 로그 출력
 
-        # 에러 로그 저장
 
         err_filename = f"{test_class_name}_errMsg.txt"
         err_filepath = os.path.join(log_dir, err_filename)
@@ -389,15 +380,14 @@ def run_coverage_for_class(row):
         
 
     if stderr_text != None: 
-        # print(stdout_text)  # 정상 로그 출력
-        # 정상 로그 저장
+
         out_filename = f"{test_class_name}_outMsg.txt"
         out_filepath = os.path.join(log_dir, out_filename)
         with open(out_filepath, "w", encoding="utf-8") as f:
             f.write(stdout_text)
         print(f"** Saved stdout to {out_filepath}")
 
-        # 자동 import fix 시도
+ 
     file_map = fix_missing_classes_with_dynamic_src(stdout_text)
 
     if len(file_map) > 0 :
@@ -409,11 +399,10 @@ def run_coverage_for_class(row):
     print("import flag", IMPORT_FLAG)
 
     if IMPORT_FLAG :
-        # import 수정됌, 재실행
+
         return 1, return_Flag
     
 
-    # 3) Surefire summary 파싱
     tests_run = failures = errors = skipped = None
     time_elapsed = None
 
@@ -438,14 +427,13 @@ def run_coverage_for_class(row):
     else:
         print(f"[INFO] No test summary line found for {method_name}")
 
-    # 빌드 실패 여부 체크
     if result.returncode != 0:
         print(f"[ERROR] Maven build/test failed for {method_name}")
         print("----- Maven stderr -----")
         print(result.stderr)
         return None, return_Flag
 
-    # 4) jacoco.csv 파싱
+
     jacoco_xml_path = os.path.join(project_root, "target", "site", "jacoco", "jacoco.xml")
     line_coverage = "-"
     branch_coverage = "-"
@@ -497,8 +485,7 @@ def run_coverage_for_class(row):
                         branch_missed = int(counters["BRANCH"].get("missed"))
                         branch_covered = int(counters["BRANCH"].get("covered"))
                         branch_total = branch_missed + branch_covered
-                        # if branch_total <= 10:
-                        #     continue
+ 
                         branch_coverage = (branch_covered / branch_total * 100) if branch_total > 0 else 0
                     else:
                         branch_coverage = "-"

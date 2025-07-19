@@ -28,3 +28,11 @@ Make sure your CSV file has the following columns (one row per method):
 - **method_signature**: Full signature of the target method  
   _Example:_ `public static String md5Crypt(byte[] data)`
 
+### Step 2: Configure the settings file
+
+In your config (e.g. `config.json`), set the following fields:
+
+- **API_KEY**: Your OpenAI API key  
+  _Example:_ `"sk-ABC123yourapikey"`
+- **CONFIG_JSON**: Path to the preprocessed data JSON  
+  _Example:_ `"/preprocess_data/cod_all_methods.json"

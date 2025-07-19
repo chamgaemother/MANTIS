@@ -6,5 +6,25 @@ pip install -r requirement.txt
 
 ---------
 # How to run?
+### Step 1: Configure your test targets in `lib_path_total.csv`
 
+Make sure your CSV file has the following columns (one row per method):
+
+- **lib**: Name of the target project  
+  _Example:_ `commons-codec`
+- **class**: Name of the target class  
+  _Example:_ `Md5Crypt`
+- **method**: Name of the target method  
+  _Example:_ `md5Crypt`
+- **path**: Path to the target class file (relative or absolute)  
+  - Relative: `.\main\java\org\apache\commons\codec\digest\Md5Crypt.java`  
+  - Absolute: `C:\Users\…\main\java\org\apache\commons\codec\digest\Md5Crypt.java`
+- **test**: Package path for the test folder (relative or absolute)  
+  _Example:_ `.\test\java\org\apache\commons\codec\digest`
+- **name**: Identifier for the test (often same as the method name)  
+  _Example:_ `md5Crypt`
+- **folder**: Path to the test folder (relative or absolute)  
+  _Example:_ `.\test\java\org\apache\commons\codec\digest`
+- **method_signature**: Full signature of the target method  
+  _Example:_ `public static String md5Crypt(byte[] data)`
 

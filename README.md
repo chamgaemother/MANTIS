@@ -4,6 +4,10 @@
 # Requirement
 pip install -r requirement.txt
 
+> **Recommendation:**  
+> - Run within a Python virtual environment.  
+> - Ensure that **Java** and **Maven (mvn)** are installed and available in your `PATH`.
+
 ---------
 # How to run?
 ### Step 1: Configure your test targets in `lib_path_total.csv`

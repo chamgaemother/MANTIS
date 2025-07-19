@@ -46,3 +46,9 @@ Generates MANTIS el.0.
 ```python main_enhance.py``` : 
 Based on MANTIS el.N, generates MANTIS el.N+1 (up to 2 iterations).
 
+### Step 4: Measure Coverage
+
+- Check the log file for coverage metrics and the number of times each agent ran.  
+- To collect project-level coverage, run:
+  ```mvn jacoco:report```
+  

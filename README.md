@@ -24,7 +24,7 @@ Make sure your CSV file has the following columns (one row per method):
 - **name**: Identifier for the test (often same as the method name)  
   _Example:_ `md5Crypt`
 - **folder**: Path to the test folder (relative or absolute)  
-  _Example:_ `.\test\java\org\apache\commons\codec\digest`
+  _Example:_ `.\test`
 - **method_signature**: Full signature of the target method  
   _Example:_ `public static String md5Crypt(byte[] data)`
 

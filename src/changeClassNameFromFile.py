@@ -9,7 +9,7 @@ from pathlib import Path
 
 from config import Config
 
-# 콘솔 출력 인코딩 설정
+
 
 target_folder = "./result"
 JSON_PATH = Config.get_json_path()
@@ -36,7 +36,7 @@ def fix_class_name_to_match_filename(file_path):
             declared_class_name = match.group(1)
             if declared_class_name != file_class_name:
                 print(f"[수정] 파일명: {file_class_name} ← 클래스명: {declared_class_name}")
-                # 클래스 이름 교체 (처음 1번만)
+
                 updated_content = re.sub(
                     rf'\bpublic\s+class\s+{declared_class_name}',
                     f'public class {file_class_name}',

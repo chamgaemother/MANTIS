@@ -30,7 +30,6 @@ from ExeAndCov import main as ExeAndCov
 
 
 """
-순서 
 1. genPrompt
 2. Prompt pp
 3. gen initialTest
@@ -45,16 +44,13 @@ from ExeAndCov import main as ExeAndCov
 """
 
 def log_step(step_name, phase):
-    """
-    step_name : "GenPrompt" 등 단계를 식별할 수 있는 이름
-    phase : "START" or "END"
-    """
+
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     log_line = f"[{timestamp}] [{step_name}] {phase}"
     
-    # 콘솔 출력
+
     print(log_line)
-    # 파일에 저장
+
     os.makedirs('./result', exist_ok=True)
     with open(LOG_FILE_PATH, 'a', encoding='utf-8') as f:
         f.write(log_line + '\n')
@@ -101,11 +97,11 @@ def execute_test(final_loop_flag=0):
     line_cov, branch_cov = ExeAndCov()
 
     if line_cov == "-" or branch_cov =="-":
-        #에러 발생
+     
         return 2
     else :
-        print("라인 커버리지:", line_cov)
-        print("브랜치 커버리지:", branch_cov)
+        print("line coverage:", line_cov)
+        print("branch coverage:", branch_cov)
         return 1
 
 def error_fix():
@@ -123,7 +119,7 @@ def count_check(class_value, name_value):
         out_txt = os.path.join(SOURCE_DIR, f"{class_value}_{name_value}_0_{i}_Test_outMsg.txt")
 
         if os.path.exists(out_txt) and os.path.getsize(out_txt) > 0 :
-            print(f"파일 존재 & 내용 있음: {out_txt}")
+            print(f"file existed: {out_txt}")
             fix_list.append(f"{class_value}_{name_value}_0_{i}_Test")
 
     return fix_list
@@ -131,12 +127,12 @@ def count_check(class_value, name_value):
 def delete_path(path):
     if os.path.isfile(path):
         os.remove(path)
-        print(f"✅ 파일 삭제: {path}")
+
     elif os.path.isdir(path):
         shutil.rmtree(path)
-        print(f"✅ 폴더 및 내부 전체 삭제: {path}")
+    
     else:
-        print(f"⚠️ 존재하지 않는 경로: {path}")
+        print(f"⚠️ : {path}")
 
 def main(class_value, method_value, test_path):
 
@@ -180,10 +176,10 @@ def main(class_value, method_value, test_path):
                 print("⚠️⚠️Execute InitialTest Error")
                 return 0
 
-        elif result == 1: # 정상 실행행
+        elif result == 1: 
                 break
 
-        elif result == 2: #에러 발생 
+        elif result == 2: 
                       
                 err_parse()
                 target = count_check(class_value, method_value)
@@ -191,8 +187,7 @@ def main(class_value, method_value, test_path):
                 comment_flag = False
 
                 if len(target) == 0 :
-                    print("수정할게 없는데 실행이 안됌")
-                    print("삭제 추후 재 실행")
+
                     all_comment()
                     break
                 for t in target :
@@ -223,19 +218,19 @@ def main(class_value, method_value, test_path):
 
     if fix_count  ==  max(scenario_n, 5):
         print("---------------------------------------------------------")
-        print(f"마지막 수정 확인")
+        print(f"final fix check")
         print("---------------------------------------------------------")
         
         result = execute_test(1)      
         if result != 1:
-            print("코드를 주석 처리 합니다.")
+
             Comment()
             result = execute_test()
 
             if result == 1 :
-                print("코드 주석 처리 완료. 다음으로 진행 합니다.")
+                print("next")
             else :
-                print("삭제 추후 재 실행")
+                print("")
                 all_comment()
                 # delete_path(SOURCE_DIR)
                 # print(count_txt_files_in_scenarios())
@@ -267,11 +262,11 @@ def main(class_value, method_value, test_path):
 
 if __name__ == "__main__":
     with open(input_file, 'r', encoding='utf-8') as infile:
-        reader = list(csv.reader(infile))  # 리스트로 변환해서 인덱싱 가능하게
-        header = reader[0]  # 첫 줄 고정
-        data_rows = reader[1:]  # 나머지 줄 반복 대상
+        reader = list(csv.reader(infile))  
+        header = reader[0]  
+        data_rows = reader[1:] 
 
-        for i, row in enumerate(data_rows, start=2):  # 줄 번호는 보기 편하게 2부터 시작
+        for i, row in enumerate(data_rows, start=2): 
 
             lib = row[0]
             class_name = row[1]
@@ -286,18 +281,18 @@ if __name__ == "__main__":
             # new_folder = f"{lib}_{class_name}_{name}_{param}_result"
 
             if os.path.exists(new_folder):
-                print(f"이미 처리된 항목: {new_folder} → main() 건너뜀")
+                print(f"warn: {new_folder} → main() skip")
                 continue
 
             with open(output_file, 'w', encoding='utf-8', newline='') as outfile:
                 writer = csv.writer(outfile)
-                writer.writerow(header)  # 고정 1줄
-                writer.writerow(row)     # 현재 줄
+                writer.writerow(header)  
+                writer.writerow(row)     
 
-            print(f"{i}번째 줄 처리 중:", row)
-            print("======= 시작 =======")
+            print(f"{i} LINE RUNING:", row)
+            print("======= START =======")
             result = main(class_name, name, test)
-            print("======= 끝 =======")
+            print("======= FINISH =======")
 
             if result == 0 :
                 continue
@@ -306,10 +301,9 @@ if __name__ == "__main__":
             
 
             if os.path.exists(old_folder):
-                # 기존 새 폴더 있으면 삭제하고 덮어쓰기
                 if os.path.exists(new_folder):
                     shutil.rmtree(new_folder)
                 os.rename(old_folder, new_folder)
-                print(f"폴더 이름 변경 완료: {old_folder} → {new_folder}")
+                print(f"{old_folder} → {new_folder}")
             else:
-                print(f"폴더 없음: {old_folder}")   
+                print(f"not found: {old_folder}")   

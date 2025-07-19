@@ -2,7 +2,7 @@
 
 ----------
 # Requirement
-
+pip install -r requirement.txt
 
 ---------
 # How to run

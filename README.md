@@ -40,9 +40,9 @@ In your config (e.g. `config.py`), set the following fields:
 
 ### Step 3: Run the core MANTIS pipeline
 
-```python main.py```
+```python main.py``` : 
 Generates MANTIS el.0.
 
-```python main_enhance.py```
+```python main_enhance.py``` : 
 Based on MANTIS el.N, generates MANTIS el.N+1 (up to 2 iterations).
 

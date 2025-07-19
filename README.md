@@ -39,14 +39,10 @@ In your config (e.g. `config.py`), set the following fields:
 
 
 ### Step 3: Run the core MANTIS pipeline
-ChatGPT의 말:
-markdown
-복사
-편집
-```bash python main.py```
+
+```python main.py```
 Generates MANTIS el.0.
 
-bash
-python main_enhance.py
+```python main_enhance.py```
 Based on MANTIS el.N, generates MANTIS el.N+1 (up to 2 iterations).
 

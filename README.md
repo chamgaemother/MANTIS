@@ -30,7 +30,7 @@ Make sure your CSV file has the following columns (one row per method):
 
 ### Step 2: Configure the settings file
 
-In your config (e.g. `config.json`), set the following fields:
+In your config (e.g. `config.py`), set the following fields:
 
 - **API_KEY**: Your OpenAI API key  
   _Example:_ `"sk-ABC123yourapikey"`

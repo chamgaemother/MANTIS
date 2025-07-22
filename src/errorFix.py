@@ -12,16 +12,16 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from config import Config
 from Utils import chat_with_openai, count_txt_files_in_scenarios, count_txt_files_in_enhance, count_java_files, load_prompt, count_txt_files_in_enhance2, extract_method_body, are_signatures_equal
 
-# OpenAI Client 초기화
+# OpenAI Client initialize
 client = openai.OpenAI(api_key=Config.get_api_key())
 
-# 프롬프트 파일 경로 설정
+
 PROMPT_DIR = Config.get_prompt_dir()
 
 SYSTEM_PROMPT_PATH = "./prompt/errorFix System.txt"
 USER_PROMPT_PATH = "./prompt/errorFix User.txt"
 AI_PROMPT_PATH = "./prompt/errorFix AI.txt"
-JSON_PATH = Config
+JSON_PATH = Config.
 SOURCE_DIR = "./result"
 
 

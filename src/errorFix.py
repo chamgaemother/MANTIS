@@ -21,7 +21,7 @@ PROMPT_DIR = Config.get_prompt_dir()
 SYSTEM_PROMPT_PATH = "./prompt/errorFix System.txt"
 USER_PROMPT_PATH = "./prompt/errorFix User.txt"
 AI_PROMPT_PATH = "./prompt/errorFix AI.txt"
-JSON_PATH = Config.
+JSON_PATH = Config.get_json_path()
 SOURCE_DIR = "./result"
 
 
@@ -34,15 +34,15 @@ def extract_error_lines(file_path):
     return error_lines
 
 def save_response(response_obj, model, system_prompt, user_prompt):
-    """AI 응답을 JSON 파일로 저장"""
+   
     now = datetime.datetime.now()
-    timestamp = now.strftime("%Y%m%d_%H%M%S")  # YYYYMMDD_HHMMSS 형식
+    timestamp = now.strftime("%Y%m%d_%H%M%S")  # YYYYMMDD_HHMMSS 
     filename = f"{timestamp}_{model}_response.json"
-    directory = "./result" # 저장할 디렉토리 이름
-    os.makedirs(directory, exist_ok=True)  # 디렉토리가 없으면 생성
+    directory = "./result" 
+    os.makedirs(directory, exist_ok=True)  # 
     filepath = os.path.join(directory, filename)
 
-    # JSON 형식으로 데이터 저장
+    # JSON 
     response_data = {
         "info": {
             "model": model,
@@ -73,14 +73,14 @@ def save_response(response_obj, model, system_prompt, user_prompt):
     with open(filepath, "w", encoding="utf-8") as file:
         json.dump(response_data, file, indent=4, ensure_ascii=False)
 
-    print(f"✅ 응답이 JSON 파일로 저장되었습니다: {filepath}")
+    print(f"✅ : {filepath}")
 
 
 def process_prompt_file(err_file_name, file_path, library_name, class_name, name, original_code, target_dict,
                         user_prompt, system_prompt, ai_prompt, model, unit_test) :
 
     if not os.path.exists(err_file_name):
-        return f"-- 오류 파일 없음: {err_file_name}"
+        return f"-- : {err_file_name}"
     
     with open(err_file_name, "r", encoding="utf-8") as pf:
         out_Msg = pf.read()
@@ -113,7 +113,7 @@ def process_prompt_file(err_file_name, file_path, library_name, class_name, name
     save_filename = err_file_name.replace("Test_outMsg.txt", "fix_Test.json")
     save_path = save_filename
 
-    print("저장경로 : ", save_path)
+    print("save path : ", save_path)
 
     response_data = {
                     "info": {
@@ -123,7 +123,7 @@ def process_prompt_file(err_file_name, file_path, library_name, class_name, name
                             "completion_tokens": chain_response_obj.usage.completion_tokens,
                             "prompt_tokens": chain_response_obj.usage.prompt_tokens,
                             "total_tokens": chain_response_obj.usage.total_tokens,
-                            # 아래 details 는 모델 종류에 따라 없을 수도 있으므로 가변적으로 처리
+                    
                             "completion_tokens_details": {
                                 "accepted_prediction_tokens": chain_response_obj.usage.completion_tokens_details.accepted_prediction_tokens,
                                 "audio_tokens": chain_response_obj.usage.completion_tokens_details.audio_tokens,
@@ -146,44 +146,44 @@ def process_prompt_file(err_file_name, file_path, library_name, class_name, name
     with open(save_path, "w", encoding="utf-8") as sf:
         json.dump(response_data, sf, indent=4, ensure_ascii=False)
 
-    return f"-- 완료: {save_filename}"
+    return f"-- finish result save: {save_filename}"
     
 
 
 def main():
-    print("💬 OpenAI Chat 시작 (종료하려면 'exit' 입력)")
+    print("💬 OpenAI Chat start")
 
-    # 사용자에게 모델 선택 요청 (번호 입력)
+
     while True:
-        # 예시를 위해 고정 (원본 로직 유지)
+        
         model_choice = '1'
 
         if model_choice in Config.MODEL_MAP:
             model = Config.MODEL_MAP[model_choice]
-            print(f"✅ 모델 `{model}` 선택됨.\n")
+            print(f"✅ model `{model}` selected.\n")
             break
         else:
-            print("❌ 올바른 번호를 입력하세요.")
+            print("❌ .")
 
-    # 프롬프트 파일 로드
+
     system_prompt = load_prompt(SYSTEM_PROMPT_PATH) 
     ai_prompt = load_prompt(AI_PROMPT_PATH) 
     user_prompt = load_prompt(USER_PROMPT_PATH)
     json_file = Path(JSON_PATH)
 
     if not user_prompt:
-        print("❌ `user.txt` 파일이 비어있거나 없습니다. `/prompt/user.txt`를 확인하세요.")
+        print("❌ `user.txt` not found. please check `/prompt/user.txt` file")
         exit()
 
     if model != "o1-mini" and not system_prompt:
-        print("⚠️ `system.txt` 파일이 비어있거나 없습니다. `/prompt/system.txt`를 확인하세요.")
+        print("⚠️ `system.txt` file is empty. please check `/prompt/system.txt`.")
 
     with json_file.open(encoding="utf-8") as f:
         data = json.load(f)            # → Python list[ dict ]
 
-    print("🎤 모델과 프롬프트 설정 완료!")
+    print("🎤 model and prompt finish!")
 
-    # 이 부분에서 path.txt → path.csv 로 변경, Pandas DataFrame 처리
+
     path_file = "path_temp.csv"
     df = pd.read_csv(path_file, encoding="cp949")
     futures = []
@@ -197,7 +197,7 @@ def main():
             test_path = row.get("test", "").strip()
 
             if not file_path or not os.path.exists(file_path):
-                print(f"-- 경로가 비었거나 없음: {file_path}")
+                print(f"-- path is empty: {file_path}")
                 continue
 
             target_dict = dict()
@@ -213,7 +213,7 @@ def main():
                 original_code = code_file.read()
 
             if not target_dict:
-                print(f"-- 대상 메서드 정보 누락: {class_name}.{name}")
+                print(f"-- target method infomation less: {class_name}.{name}")
                 continue
 
             fix_list = []
@@ -225,9 +225,9 @@ def main():
                     out_txt = os.path.join(SOURCE_DIR, f"{class_name}_{name}_2_{i}_Test_outMsg.txt")
                     unit_test_path = os.path.join(test_path, f"{class_name}_{name}_2_{i}_Test.java")
                     if os.path.exists(out_txt) and os.path.getsize(out_txt) > 0 and os.path.exists(unit_test_path):
-                        print(f"파일 존재 & 내용 있음: {out_txt}")
+                        print(f"target : {out_txt}")
                         fix_list.append(out_txt)
-                        # 여기에 처리할 로직 작성
+           
                         with open(unit_test_path, "r", encoding="utf-8") as test_file:
                             unit_test = test_file.read()
                             unit_tests[out_txt] = unit_test
@@ -236,20 +236,20 @@ def main():
                     out_txt = os.path.join(SOURCE_DIR, f"{class_name}_{name}_1_{i}_Test_outMsg.txt")
                     unit_test_path = os.path.join(test_path, f"{class_name}_{name}_1_{i}_Test.java")
                     if os.path.exists(out_txt) and os.path.getsize(out_txt) > 0 and os.path.exists(unit_test_path):
-                        print(f"파일 존재 & 내용 있음: {out_txt}")
+                        print(f"target: {out_txt}")
                         fix_list.append(out_txt)
-                        # 여기에 처리할 로직 작성
+                  
                         with open(unit_test_path, "r", encoding="utf-8") as test_file:
                             unit_test = test_file.read()
                             unit_tests[out_txt] = unit_test
-            else : # 초기 테스트
+            else : # 
                 for i in range(1, count_txt_files_in_scenarios() + 1) :
                     out_txt = os.path.join(SOURCE_DIR, f"{class_name}_{name}_0_{i}_Test_outMsg.txt")
                     unit_test_path = os.path.join(test_path, f"{class_name}_{name}_0_{i}_Test.java")
                     if os.path.exists(out_txt) and os.path.getsize(out_txt) > 0 and os.path.exists(unit_test_path):
-                        print(f"파일 존재 & 내용 있음: {out_txt}")
+                        print(f"target : {out_txt}")
                         fix_list.append(out_txt)
-                        # 여기에 처리할 로직 작성
+                       
                         with open(unit_test_path, "r", encoding="utf-8") as test_file:
                             unit_test = test_file.read()
                             unit_tests[out_txt] = unit_test
@@ -264,11 +264,11 @@ def main():
         for future in as_completed(futures):
             print(".")
 
-    print("\n-- 모든 경로에 대한 처리가 완료되었습니다!")
+
 
     return
     if os.path.exists(path_file):
-        # CSV 파일을 읽어 DataFrame 생성
+
         df = pd.read_csv(path_file, encoding="cp949")
 
         
@@ -284,13 +284,13 @@ def main():
             enhance_n = count_txt_files_in_enhance()
             enhance2_n = count_txt_files_in_enhance2()
 
-            if enhance_n != 0: # 개선 된 Case
+            if enhance_n != 0: #
                 target_classes = []
                 error_paths = []
                 target = enhance_n
                 if enhance2_n > 0 :
                     target = enhance2_n
-                for i in range(1, target+1): #기본 case
+                for i in range(1, target+1): #
                     unit_test_path = row.get("test", "").strip() + "\\" + row.get("class", "") + "_" +row.get("name", "").strip() +f"_1_{i}_Test.java"
                     if enhance2_n > 0 :
                         unit_test_path = row.get("test", "").strip() + "\\" + row.get("class", "") + "_" +row.get("name", "").strip() +f"_2_{i}_Test.java"
@@ -309,7 +309,7 @@ def main():
             else :
                 target_classes = []
                 error_paths = []
-                for i in range(1, scenario_n+1): #기본 case
+                for i in range(1, scenario_n+1): 
                     unit_test_path = row.get("test", "").strip() + "\\" + row.get("class", "") + "_" +row.get("name", "").strip() +f"_0_{i}_Test.java"
                     if os.path.exists(unit_test_path):
                         target_classes.append(unit_test_path)
@@ -321,7 +321,7 @@ def main():
 
 
             if not file_path:
-                continue  # path가 비어있으면 무시
+                continue 
 
             target_dict = dict()
             
@@ -334,7 +334,7 @@ def main():
 
 
             if os.path.exists(file_path):
-                # Java 소스 코드 읽기
+               
                 try :
                     with open(file_path, "r", encoding="utf-8") as code_file:
                         original_code = code_file.read()
@@ -342,14 +342,14 @@ def main():
                     with open(unit_test_path, "r", encoding="utf-8") as test_file:
                         unit_test = test_file.read()
                 except Exception as e:
-                    print(f"⚠️ 파일 열기 실패: {file_path} ({e})")
+                    print(f"⚠️ : {file_path} ({e})")
                     continue
 
                 if target_dict["body"] == "(source not found)" :
                     body =  extract_method_body(original_code, method_signature)
                     target_dict["body"] = body
 
-                # user_prompt에서 필요한 부분들을 순차적으로 대체
+            
                 user_prompt_modified = user_prompt.replace("{ Library Name }", library_name)
                 user_prompt_modified = user_prompt_modified.replace("{ Class Name }", class_name)
                 user_prompt_modified = user_prompt_modified.replace("{ Insert existing JUnit 5 test code here }", unit_test)
@@ -378,19 +378,19 @@ def main():
                 print(f"\n📝 '{file_path}' 파일의 코드를 {model} 모델로 처리 중...")
 
 
-                # OpenAI와 채팅 실행
+  
                 chain_response_obj, chain_response_text = chat_with_openai(
                     model, system_prompt, ai_prompt, user_prompt_modified
                 )
 
                 if isinstance(chain_response_obj, str):
-                    # OpenAIError 등 에러 메시지
+                
                     print(chain_response_obj)
                     continue
 
                 print(f"🤖 AI ({file_path}): {chain_response_text[:200]}")
 
-                # 응답 저장
+
                 if chain_response_obj:
                     save_response(chain_response_obj, model, system_prompt, user_prompt_modified)
             else:

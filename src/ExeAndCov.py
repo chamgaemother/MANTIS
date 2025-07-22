@@ -89,7 +89,7 @@ def find_java_file_by_classname(root_folder, class_name):
 
     root_folder = root_folder[1:]
     if not root_folder or not os.path.isdir(root_folder):
-        print(f"[WARN] 잘못된 검색 루트: {root_folder}")
+        print(f"[WARN] : {root_folder}")
         return None
 
     target_file = class_name + ".java"
@@ -119,7 +119,7 @@ def add_import_to_file(test_file_path, import_statement):
 
         test_file_path = test_file_path[1:]
         if not os.path.isfile(test_file_path):
-            print(f"[WARN] 대상 파일이 존재하지 않음: {test_file_path}")
+            print(f"[WARN] : {test_file_path}")
             return
 
         with open(test_file_path, "r", encoding="utf-8") as f:
@@ -160,14 +160,14 @@ def add_basic_import(test_file_paths: list, import_statement: str):
 
         path = Path(test_file_path)
         if not path.exists():
-            print(f"[ERROR] 파일이 존재하지 않습니다: {test_file_path}")
+            print(f"[ERROR] : {test_file_path}")
             return
 
         lines = path.read_text(encoding='utf-8').splitlines()
 
 
         if any(line.strip() == import_statement for line in lines):
-            print(f"[INFO] 이미 import가 존재함: {import_statement}")
+            print(f"[INFO] : {import_statement}")
             return
 
  
@@ -184,7 +184,7 @@ def add_basic_import(test_file_paths: list, import_statement: str):
 
     
         path.write_text("\n".join(lines), encoding='utf-8')
-        print(f"[SUCCESS] import 추가됨: {import_statement} -> {test_file_path}")
+        print(f"[SUCCESS] import : {import_statement} -> {test_file_path}")
         IMPORT_FLAG = True
 
 
@@ -200,18 +200,18 @@ def fix_missing_classes_with_dynamic_src(error_log_text):
   
         src_main_folder = get_src_main_folder(test_file_path)
         if not src_main_folder:
-            print(f"[ERROR] src/main/java 폴더를 추출하지 못함. ({test_file_path})")
+            print(f"[ERROR] src/main/java  ({test_file_path})")
             continue
 
   
         matched = find_java_file_by_classname(src_main_folder, cls_name)
         if not matched:
-            print(f"[ERROR] {cls_name}.java를 '{src_main_folder}'에서 찾지 못함.")
+            print(f"[ERROR] {cls_name}.java not found in  '{src_main_folder}'")
             continue
 
         pkg = parse_package_name(matched)
         if not pkg:
-            print(f"[WARN] package 구문이 없는 파일: {matched}")
+            print(f"[WARN] package  {matched}")
             continue
 
         import_stmt = f"import {pkg}.{cls_name};"
@@ -306,7 +306,7 @@ def run_coverage_for_class(row):
     
     agt_test_folder = row["folder"]
     project_root = os.path.abspath(os.path.join(agt_test_folder, "..", ".."))
-    jdk_home       = r"C:\Users\00000\.jdks\corretto-17.0.15" # your path in
+    jdk_home       = r"YOUT_JDK_PATH" # your path in
 
     
     jacoco_cmd = "org.jacoco:jacoco-maven-plugin:report"
@@ -342,8 +342,8 @@ def run_coverage_for_class(row):
             mvn_exe = str(wrapper)
         else:
             raise FileNotFoundError(
-                "Maven 실행 파일을 찾을 수 없습니다. "
-                "MAVEN_HOME/M2_HOME 설정 또는 mvnw(.cmd) 위치를 확인하세요."
+                "Maven not found"
+                "MAVEN_HOME/M2_HOME check"
             )
 
 
@@ -422,7 +422,7 @@ def run_coverage_for_class(row):
                 time_elapsed = float(match.group(5))
             else:
                 time_elapsed = 0.0
-            print(f"[저장된 정보] Tests run: {tests_run}, Failures: {failures}, Errors: {errors}, Skipped: {skipped}")
+            print(f"[save info] Tests run: {tests_run}, Failures: {failures}, Errors: {errors}, Skipped: {skipped}")
             return_Flag = True
     else:
         print(f"[INFO] No test summary line found for {method_name}")
@@ -444,7 +444,7 @@ def run_coverage_for_class(row):
         print("[ERROR] jacoco.xml not found:", jacoco_xml_path)
         return results, return_Flag
     else :
-        print("--커버리지 측정 완료--")
+        print("--coverage--")
         return_Flag =True
 
     tree = ET.parse(jacoco_xml_path)
@@ -491,8 +491,8 @@ def run_coverage_for_class(row):
                         branch_coverage = "-"
 
                     print(f"{fqcn}::{m_name}{m_desc}")
-                    print(f"  라인 커버리지: {line_coverage:.2f}%" if line_coverage != "-" else "  라인 커버리지: -")
-                    print(f"  브랜치 커버리지: {branch_coverage:.2f}%" if branch_coverage != "-" else "  브랜치 커버리지: -")
+                    print(f"  line coverage : {line_coverage:.2f}%" if line_coverage != "-" else "  line coverage: -")
+                    print(f"  branch coverage: {branch_coverage:.2f}%" if branch_coverage != "-" else "  branch coverage: -")
 
                     results.append({
                         "class": fqcn,
@@ -503,7 +503,7 @@ def run_coverage_for_class(row):
                     })
 
     if not found:
-        print(f"[WARN] 클래스 {class_name} 가 jacoco.xml 에서 발견되지 않음.")
+        print(f"[WARN] class '{class_name}' is not found in jacoco.xml.")
 
     return results, return_Flag
 
@@ -514,7 +514,7 @@ def main():
         for row in reader:
             row_result, Flag = run_coverage_for_class(row)
             if row_result == 1 :
-                print("임포트 수정 되서 재실행")
+
                 row_result = run_coverage_for_class(row)
             elif row_result == 0 :
                 continue
@@ -523,7 +523,7 @@ def main():
                     print("line_coverage: ", row_result[0]["line_coverage"],", branch_coverage: " , row_result[0]["branch_coverage"] )
                     return row_result[0]["line_coverage"], row_result[0]["branch_coverage"]
                 except Exception :
-                    print("coverage 추출 실패")
+
                     return 1, 1
             else :
                 return "-", "-"

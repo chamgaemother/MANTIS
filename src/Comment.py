@@ -13,10 +13,7 @@ CSV_FILE = "path_temp.csv"
 SOURCE_DIR = "./result" 
 
 def parse_error_lines(error_log_lines):
-    """
-    error_log_lines: 에러 로그 문자열 리스트
-    return: 에러가 발생한 라인 번호 리스트(int)
-    """
+
     error_line_numbers = []
     pattern = re.compile(r'\[(\d+),\d+\]')  
     for line in error_log_lines:
@@ -53,7 +50,7 @@ def extract_test_method_line_blocks(file_lines):
                 j += 1
 
             if j == n:
-                print(f"@Test 발견: {i}, 메서드 선언 못 찾고 j == {j}")
+                print(f"@Test found: {i},  j == {j}")
 
                 i = j
                 continue
@@ -116,19 +113,19 @@ def target_main(target):
                     path = Path(target_file)
 
                     if not path.exists():
-                        print(f"❌ 주석 처리할 파일이 존재하지 않습니다: {target_file}")
+                        print(f"❌ : {target_file}")
                     else:
                         lines = path.read_text(encoding='utf-8').splitlines()
                         method_blocks = extract_test_method_line_blocks(lines)
-                        print(f"테스트 메서드 블록: {method_blocks}")
+                        print(f"test method block : {method_blocks}")
                         error_lines = parse_error_lines(error_file)
-                        print(f"에러 라인: {error_lines}")
+                        print(f"errir lines: {error_lines}")
 
                         result_code = comment_out_error_blocks(target_file, error_lines, method_blocks)
 
    
                         path.write_text(result_code, encoding='utf-8')
-                        print(f"✅ 주석 처리 완료: {target_file}")
+                        print(f"✅ : {target_file}")
 
             except Exception as e:
                 print(f"Error: {e}")
@@ -153,7 +150,7 @@ def main() :
                         out_txt = os.path.join(SOURCE_DIR, f"{class_value}_{name_value}_2_{i}_Test_outMsg.txt")
 
                         if os.path.exists(out_txt) and os.path.getsize(out_txt) > 0 :
-                            print(f"파일 존재 & 내용 있음: {out_txt}")
+                            print(f"[info]: {out_txt}")
                             fix_list.append(out_txt)
               
                 elif count_txt_files_in_enhance() > 0 :
@@ -161,7 +158,7 @@ def main() :
                         out_txt = os.path.join(SOURCE_DIR, f"{class_value}_{name_value}_1_{i}_Test_outMsg.txt")
 
                         if os.path.exists(out_txt) and os.path.getsize(out_txt) > 0 :
-                            print(f"파일 존재 & 내용 있음: {out_txt}")
+                            print(f"[info]: {out_txt}")
                             fix_list.append(out_txt)
                
                 else : # 
@@ -169,7 +166,7 @@ def main() :
                         out_txt = os.path.join(SOURCE_DIR, f"{class_value}_{name_value}_0_{i}_Test_outMsg.txt")
 
                         if os.path.exists(out_txt) and os.path.getsize(out_txt) > 0 :
-                            print(f"파일 존재 & 내용 있음: {out_txt}")
+                            print(f"[info]: {out_txt}")
                             fix_list.append(out_txt)
            
 
@@ -180,20 +177,20 @@ def main() :
                     path = Path(target_file)
 
                     if not path.exists():
-                        print(f"❌ 주석 처리할 파일이 존재하지 않습니다: {target_file}")
+                        print(f"[warn] not found: {target_file}")
                     else:
                         lines = path.read_text(encoding='utf-8').splitlines()
                         method_blocks = extract_test_method_line_blocks(lines)
-                        print(f"테스트 메서드 블록: {method_blocks}")
+                        print(f"test method block : {method_blocks}")
                         error_lines = parse_error_lines(error_file)
-                        print(f"에러 라인: {error_lines}")
+                        print(f"error lines: {error_lines}")
 
 
     
                         result_code = comment_out_error_blocks(target_file, error_lines, method_blocks)
 
                         path.write_text(result_code, encoding='utf-8')
-                        print(f"✅ 주석 처리 완료: {target_file}")
+                        print(f"✅ : {target_file}")
 
             except Exception as e:
                 print(f"Error: {e}")
@@ -218,7 +215,7 @@ def all_comment() :
                         out_txt = os.path.join(SOURCE_DIR, f"{class_value}_{name_value}_2_{i}_Test_outMsg.txt")
 
                         if os.path.exists(out_txt) and os.path.getsize(out_txt) > 0 :
-                            print(f"파일 존재 & 내용 있음: {out_txt}")
+                            print(f"[info]: {out_txt}")
                             fix_list.append(out_txt)
                    
                 elif count_txt_files_in_enhance() > 0 :
@@ -226,7 +223,7 @@ def all_comment() :
                         out_txt = os.path.join(SOURCE_DIR, f"{class_value}_{name_value}_1_{i}_Test_outMsg.txt")
 
                         if os.path.exists(out_txt) and os.path.getsize(out_txt) > 0 :
-                            print(f"파일 존재 & 내용 있음: {out_txt}")
+                            print(f"[info]: {out_txt}")
                             fix_list.append(out_txt)
                    
                 else :
@@ -234,7 +231,7 @@ def all_comment() :
                         out_txt = os.path.join(SOURCE_DIR, f"{class_value}_{name_value}_0_{i}_Test_outMsg.txt")
 
                         if os.path.exists(out_txt) and os.path.getsize(out_txt) > 0 :
-                            print(f"파일 존재 & 내용 있음: {out_txt}")
+                            print(f"[info]: {out_txt}")
                             fix_list.append(out_txt)
                      
 
@@ -245,7 +242,7 @@ def all_comment() :
                     path = Path(target_file)
 
                     if not path.exists():
-                        print(f"❌ 주석 처리할 파일이 존재하지 않습니다: {target_file}")
+                        print(f"❌[warn] not found: {target_file}")
                     else:
                         lines = path.read_text(encoding='utf-8').splitlines()
     
@@ -258,7 +255,7 @@ def all_comment() :
 
             
                         path.write_text(result_code, encoding='utf-8')
-                        print(f"✅ 주석 처리 완료: {target_file}")
+                        print(f"✅ : {target_file}")
 
             except Exception as e:
                 print(f"Error: {e}")
@@ -284,7 +281,7 @@ def target_all(target):
                     path = Path(target_file)
 
                     if not path.exists():
-                        print(f"❌ 주석 처리할 파일이 존재하지 않습니다: {target_file}")
+                        print(f"❌ not found : {target_file}")
                     else:
                         lines = path.read_text(encoding='utf-8').splitlines()
                         result_codes = []
@@ -301,7 +298,7 @@ def target_all(target):
 
                         result_code = "\n".join(result_codes)
                         path.write_text(result_code, encoding='utf-8')
-                        print(f"✅ 주석 처리 완료: {target_file}")
+                        print(f"✅ : {target_file}")
 
 
             except Exception as e:

@@ -27,15 +27,15 @@ def fix_class_name_to_match_filename(file_path):
         match = re.search(pattern, content)
 
         if not match:
-            print(f"[SKIP] public class 선언 없음: {filename}")
+            print(f"[SKIP] public class : {filename}")
             content = content.replace("class", "public class ", 1)
-            print(f"[수정] public class 선언 추가됨: {filename}")
+            print(f"[수정] public class : {filename}")
 
         match = re.search(pattern, content)
         if match:
             declared_class_name = match.group(1)
             if declared_class_name != file_class_name:
-                print(f"[수정] 파일명: {file_class_name} ← 클래스명: {declared_class_name}")
+                print(f"[fix] : {file_class_name} ← class name: {declared_class_name}")
 
                 updated_content = re.sub(
                     rf'\bpublic\s+class\s+{declared_class_name}',
@@ -46,7 +46,7 @@ def fix_class_name_to_match_filename(file_path):
                 with open(file_path, 'w', encoding='utf-8') as f:
                     f.write(updated_content)
         else:
-            print(f"[SKIP] public class 선언 없음: {filename}")
+            print(f"[SKIP] public class not found: {filename}")
 
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -70,25 +70,25 @@ def fix_class_name_to_match_filename(file_path):
         pakage_name = ".".join(target_dict["clazz"].split(".")[:-1])
         print(pakage_name)
         if f"package {pakage_name}"+";" in content :
-            print("package 선언 있음.")
+            print("package found.")
         elif "package" in content :
-            print("package 선언 이상함.")
+            print("package invaild.")
             pattern = r'^\s*package\s+([a-zA-Z_][\w\.]*);'
             match = re.match(pattern, content)
             updated_content = content.replace(match.group(1), f" {pakage_name}")
             with open(file_path, 'w', encoding='utf-8') as f:
                     f.write(updated_content)
-            print("package 수정 완료!")
+            print("package fix success")
         else : 
-            print("package 선언 없음.")
+            print("package not found")
             updated_content = f"package {pakage_name};\n\n" + content
             with open(file_path, 'w', encoding='utf-8') as f:
                     f.write(updated_content)
-            print("package 수정 완료.")
+            print("package fix sucsess")
 
 
     except Exception as e:
-        print(f"[에러] {file_path}: {e}")
+        print(f"[error] {file_path}: {e}")
 
 def fix_all_classes_in_folder(folder_path):
     for root, _, files in os.walk(folder_path):
